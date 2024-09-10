@@ -19,7 +19,7 @@
   ],
   "plugins": ["jsx-a11y", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": "off",
     "no-console": "warn",
     "no-plusplus": "off",
     "no-shadow": "off",
