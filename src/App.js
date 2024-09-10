@@ -11,6 +11,7 @@ import ConcertDetailPage from './pages/ConcertDetail/ConcertDetailPage';
 import RegionPage from './pages/Region/RegionPage';
 import RankingPage from './pages/Ranking/RankingPage';
 import MySelectPage from './pages/MySelect/MySelectPage';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 // 홈페이지
 // 뮤지컬 전체 페이지 /musicals
@@ -25,7 +26,7 @@ import MySelectPage from './pages/MySelect/MySelectPage';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={AppLayout}>
+      <Route path='/' element={<AppLayout/>}>
         <Route index element={<Homepage />} />
         <Route path='/musicals'>
           <Route index element={<MusicalPage />} />
