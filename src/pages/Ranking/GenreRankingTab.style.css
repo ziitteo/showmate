@@ -1,0 +1,46 @@
+.genre-ranking-tab {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.genre-tab-button {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    border-right: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    box-sizing: border-box;
+}
+
+.genre-tab-button:last-child {
+    border-right: none;
+}
+
+.genre-tab-button.active {
+    background-color: #f7b5ca;
+    color: #fff;
+}
+
+.genre-tab-button:hover {
+    background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+    .genre-tab-button {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
