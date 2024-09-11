@@ -2,10 +2,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}.nav-logo-search-area {
+}
+.nav-logo-search-area {
   display: flex;
   align-items: center;
-}.nav-input-box {
+}
+.nav-input-box {
   width: 450px;
   height: 50px;
   /* max-width: 450px; */
@@ -24,7 +26,7 @@
   border: none;
   display: flex;
 }
-.nav-search-icon {
+.nav-logo ,.nav-search-icon {
   cursor: pointer;
 }
 .nav-top-items a ,.nav-bottom a {
