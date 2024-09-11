@@ -1,36 +1,34 @@
 import React, { useState } from 'react';
 import { Alert, Spinner } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import useMusicalRankingQuery from '../../../../hooks/useMusicalRanking';
-import useConcertRankingQuery from '../../../../hooks/useConcertRanking';
-import usePlayRankingQuery from '../../../../hooks/usePlayRanking';
+import useRankingQuery from '../../../../hooks/useRanking';
 import RankingCarousel from '../RankingCarousel/RankingCarousel';
 import './GenreRanking.style.css';
 
 const GenreRanking = () => {
-  const menuList = ['뮤지컬', '콘서트', '연극'];
+  const menuList = [
+    { label: '연극', categoryCode: 'AAAA' },
+    { label: '뮤지컬', categoryCode: 'GGGA' },
+    { label: '대중음악', categoryCode: 'CCCA' },
+    { label: '국악', categoryCode: 'CCCC' },
+    { label: '콘서트', categoryCode: 'CCCD' },
+    { label: '서양/한국무용', categoryCode: 'BBBC' },
+    { label: '대중무용', categoryCode: 'BBBR' },
+    { label: '서커스/마술', categoryCode: 'EEEB' },
+    { label: '복합', categoryCode: 'EEEA' },
+  ];
 
-  const [activeMenu, setActiveMenu] = useState('뮤지컬');
+  const [activeMenu, setActiveMenu] = useState(menuList[0].label);
+  const currentCategory = menuList.find(menu => menu.label === activeMenu).categoryCode;
 
-  const { data, isLoading, isError, error } = useMusicalRankingQuery();
-  const { data: concertData } = useConcertRankingQuery();
-  const { data: theaterData } = usePlayRankingQuery();
+  // 선택된 장르의 데이터를 가져오는 API 요청
+  const { data, isLoading, isError, error } = useRankingQuery('month', currentCategory);
 
   const navigate = useNavigate();
 
-  const ShowMoreMusicalRanking = () => {
+  const ShowMoreRanking = () => {
     navigate('/ranking');
   };
-
-  const ShowMoreConcertRanking = () => {
-    navigate('/ranking');
-  };
-
-  const ShowMorePlayRanking = () => {
-    navigate('/ranking');
-  };
-
-  console.log(data);
 
   const handleMenuSelect = event => {
     setActiveMenu(event.target.textContent);
@@ -50,47 +48,23 @@ const GenreRanking = () => {
         <h1>장르별 랭킹</h1>
         <ul>
           {menuList.map(menu => (
-            <li key={menu}>
-              <button type='button' onClick={handleMenuSelect} className={activeMenu === menu ? 'on' : ''}>
-                {menu}
+            <li key={menu.label}>
+              <button type='button' onClick={handleMenuSelect} className={activeMenu === menu.label ? 'on' : ''}>
+                {menu.label}
               </button>
             </li>
           ))}
         </ul>
       </div>
 
-      {activeMenu === '뮤지컬' && (
-        <div>
-          <RankingCarousel data={data.boxofs.boxof} activeMenu={activeMenu} />
-          <div className='button-wrap'>
-            <button type='button' className='more-button' onClick={ShowMoreMusicalRanking}>
-              뮤지컬 랭킹 전체보기
-            </button>
-          </div>
+      <div>
+        <RankingCarousel data={data.boxofs.boxof} activeMenu={activeMenu} />
+        <div className='button-wrap'>
+          <button type='button' className='more-button' onClick={ShowMoreRanking}>
+            랭킹 전체보기
+          </button>
         </div>
-      )}
-
-      {activeMenu === '콘서트' && (
-        <div>
-          <RankingCarousel data={concertData.boxofs.boxof} activeMenu={activeMenu} />
-          <div className='button-wrap'>
-            <button type='button' className='more-button' onClick={ShowMoreConcertRanking}>
-              콘서트 랭킹 전체보기
-            </button>
-          </div>
-        </div>
-      )}
-
-      {activeMenu === '연극' && (
-        <div>
-          <RankingCarousel data={theaterData.boxofs.boxof} activeMenu={activeMenu} />
-          <div className='button-wrap'>
-            <button type='button' className='more-button' onClick={ShowMorePlayRanking}>
-              연극 랭킹 전체보기
-            </button>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

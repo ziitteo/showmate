@@ -1,9 +1,12 @@
 import React from 'react';
+import './ItemCard.style.css';
 
 const ItemCard = ({ item }) => {
   return (
     <div className='card-container'>
-      <img src={item.poster} alt={item.prfnm} className='card-image' />
+      <div className='image-container'>
+        <img src={item.poster} alt={item.prfnm} className='card-image' />
+      </div>
       <div className='card-info'>
         <h2>{item.prfnm}</h2>
         <p>{item.fcltynm}</p>

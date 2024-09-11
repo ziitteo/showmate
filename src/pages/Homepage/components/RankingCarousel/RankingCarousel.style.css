@@ -19,6 +19,7 @@
   display: flex;
   height: 100%;
   gap: 20px;
+  padding: 0;
 }
 
 .ranking-swiper-item {
@@ -29,9 +30,9 @@
   cursor: pointer;
 }
 
-.carousel-button {
+.ranking-swiper-wrap .carousel-button {
   position: absolute;
-  top: 40%;
+  top: 35%;
   z-index: 10;
   width: 48px;
   height: 48px;
