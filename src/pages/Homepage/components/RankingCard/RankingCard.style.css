@@ -1,31 +1,37 @@
-.card-container {
+.ranking-card-container {
   width: 100%;
   height: 100%;
 }
 
-.image-wrap {
+.ranking-card-container .image-wrap {
   position: relative;
   width: 100%;
 }
 
-.ranking-info {
+.ranking-card-container .ranking-info {
   width: 100%;
   position: absolute;
   bottom: 15px;
   left: 0;
   border-radius: 8px;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.375), rgba(0, 0, 0, 0.121) 80%, rgba(0, 0, 0, 0) 100%);
+  display: flex; /* Flexbox 사용 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
+  align-items: center; /* 세로 가운데 정렬 */
+  padding-left: 15px; /* 왼쪽 패딩을 추가 */
 }
 
-.image-wrap h1 {
-  padding: 10px 0 10px 20px;
+.ranking-card-container .image-wrap .ranking-info .rank {
+  padding: 0;
   font-size: 60px;
   font-weight: 700;
   color: #fff;
   text-shadow: rgba(0, 0, 0, 0.2) 0px 4px 4px;
+  align-self: flex-start; /* rank 텍스트를 왼쪽 정렬 */
+  margin: 0;
 }
 
-.card-image {
+.ranking-card-container .image-wrap .card-image {
   width: 100%;
   height: 320px;
   object-fit: cover;
@@ -33,19 +39,19 @@
   margin-bottom: 12px;
 }
 
-.card-info h2 {
+.ranking-card-container .card-info h2 {
   font-size: 17px;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
-.card-info p {
+.ranking-card-container .card-info p {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
   margin: 0;
 }
 
-.card-info .date-info {
+.ranking-card-container .card-info .date-info {
   color: #999;
 }

@@ -11,7 +11,13 @@ const RankingCard = ({ item }) => {
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div key={item.mt20id} role='button' tabIndex='0' className='card-container' onClick={() => showDetail(item)}>
+    <div
+      key={item.mt20id}
+      role='button'
+      tabIndex='0'
+      className='ranking-card-container'
+      onClick={() => showDetail(item)}
+    >
       <div className='image-wrap'>
         <img src={`http://www.kopis.or.kr/${item.poster}`} alt={item.prfnm} className='card-image' />
         <div className='ranking-info'>
