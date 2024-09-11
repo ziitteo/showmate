@@ -10,6 +10,8 @@ import RegionPage from './pages/Region/RegionPage';
 import RankingPage from './pages/Ranking/RankingPage';
 import MySelectPage from './pages/MySelect/MySelectPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from 'react';
+import Login from './pages/Login/Login';
 
 // 홈페이지
 // 뮤지컬 전체 페이지 /musicals
@@ -20,10 +22,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // 랭킹 페이지 /rankings
 // 나의 찜 페이지 /my-select
 function App() {
+  const [authenticate, setAuthenticate] = useState(false); // 로그인 성공 유무
+  useEffect(() => {
+    console.log('Check Login :', authenticate);
+  }, [authenticate]);
   return (
     <Routes>
       <Route path='/' element={<AppLayout />}>
         <Route index element={<Homepage />} />
+        <Route path='/login' element={<Login setAuthenticate={setAuthenticate} />} />
+        <Route path='/musicals'>
+          <Route index element={<MusicalPage />} />
+          <Route path=':id' element={<MusicalDetailPage />} />
+        </Route>
+        <Route path='/theaters'>
+          <Route index element={<TheaterPage />} />
+          <Route path=':id' element={<TheaterDetailPage />} />
+        </Route>
+        <Route path='/concerts'>
+          <Route index element={<ConcertPage />} />
+          <Route path=':id' element={<ConcertDetailPage />} />
+        </Route>
+        <Route path='/regions' element={<RegionPage />} />
+        <Route path='/rankings' element={<RankingPage />} />
         <Route path='/musical' element={<MusicalPage />} />
         <Route path='/play' element={<PlayPage />} />
         <Route path='/concert' element={<ConcertPage />} />
