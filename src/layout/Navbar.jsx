@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Navbar.style.css';
 import { useNavigate } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,7 +15,7 @@ const Navbar = () => {
     // navigate (`${searchTerm}`)
   };
   return (
-    <div>
+    <Container>
       <div className='nav-top'>
         <div className='nav-logo-search-area'>
           <img width='200px' src='https://www.creativefabrica.com/wp-content/uploads/2020/04/12/Ticket-Logo-Graphics-3851465-1.jpg'  alt="profile"/>
@@ -50,7 +51,7 @@ const Navbar = () => {
         <a className='main-color'>랭킹</a>
         <a className='main-color'>지역별</a>
       </div>
-    </div>
+    </Container>
   )
 };
 

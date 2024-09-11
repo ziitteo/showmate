@@ -31,6 +31,7 @@
   color: black;
   text-decoration: none;
   margin: 10px;
+  font-weight: bold;
 }
 
 .nav-bottom {
@@ -40,11 +41,9 @@
 
 .main-color {
   color: #F7B5CA !important;
-  font-weight: bold;
 }
 .sub-color {
   color: #E4CCFD !important;
-  font-weight: bold;
 }
 .text-gray {
   color: lightgray !important;;
