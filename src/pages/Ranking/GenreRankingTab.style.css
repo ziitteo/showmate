@@ -1,18 +1,18 @@
-.genre-ranking-tab {
+.ranking-genre-tab {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 0;
     border: 1px solid #ddd;
     border-radius: 15px;
     overflow: hidden;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 15px auto;
 }
 
-.genre-tab-button {
+.ranking-genre-button {
     flex: 1;
-    padding: 10px 20px;
+    padding: 8px 20px;
     border: none;
     border-right: 1px solid #ddd;
     background-color: #fff;
@@ -23,24 +23,75 @@
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     box-sizing: border-box;
+    position: relative;
 }
 
-.genre-tab-button:last-child {
+.ranking-genre-button .ranking-genre-detail {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 2px;
+    color: #666;
+}
+
+.ranking-genre-button:last-child {
     border-right: none;
 }
 
-.genre-tab-button.active {
+.ranking-genre-button.active {
     background-color: #f7b5ca;
     color: #fff;
 }
 
-.genre-tab-button:hover {
+.ranking-genre-button:hover {
     background-color: #f4f4f4;
 }
 
-@media (max-width: 768px) {
-    .genre-tab-button {
-        padding: 5px 10px;
-        font-size: 12px;
+.ranking-genre-button.active:hover {
+    background-color: #f7b5ca;
+    color: #fff;
+}
+
+.ranking-genre-button.active .ranking-genre-detail {
+    color: #fff;
+}
+
+@media (max-width: 1024px) {
+    .ranking-genre-tab {
+        display: flex;
+        justify-content: flex-start;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        scrollbar-width: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    .ranking-genre-tab::-webkit-scrollbar {
+        display: none;
+    }
+
+    .ranking-genre-button {
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        background-color: #fff;
+        color: #333;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        white-space: nowrap;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+        margin: 0 5px;
+    }
+
+    .ranking-genre-button .ranking-genre-detail {
+        display: inline;
+        margin: 0;
     }
 }
