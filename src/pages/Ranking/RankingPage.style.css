@@ -1,0 +1,56 @@
+.ranking-page {
+    margin: 0;
+    padding: 0 50px;
+    box-sizing: border-box;
+    margin-top: 100px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 150px auto 0 auto;
+}
+
+.ranking-page h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.period-selector {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 1250px;
+}
+
+.period-selector button {
+    border: none;
+    background: none;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+.period-selector button:hover {
+    color: #f7b5ca;
+}
+
+.period-selector .divider {
+    color: #999;
+    margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+    .ranking-page {
+        padding: 0 20px;
+        margin-top: 50px;
+    }
+
+    .period-selector {
+        justify-content: flex-end;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
