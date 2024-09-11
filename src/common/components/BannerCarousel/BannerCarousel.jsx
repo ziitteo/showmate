@@ -119,16 +119,15 @@ const BannerCarousel = ({ data }) => {
                 transform: `translateX(-${(slideWidth + slideGap) * currentIndex}px)`,
               }}
             >
-              {data &&
-                data.slice(0, 10).map(item => (
-                  <li
-                    key={item.prfseq}
-                    className='banner-swiper-item'
-                    style={{ width: `${slideWidth}px`, flex: `0 0 ${slideWidth}px` }}
-                  >
-                    <BannerItem item={item} />
-                  </li>
-                ))}
+              {data?.slice(0, 10).map(item => (
+                <li
+                  key={item.prfseq}
+                  className='banner-swiper-item'
+                  style={{ width: `${slideWidth}px`, flex: `0 0 ${slideWidth}px` }}
+                >
+                  <BannerItem item={item} />
+                </li>
+              ))}
             </ul>
           </div>
 

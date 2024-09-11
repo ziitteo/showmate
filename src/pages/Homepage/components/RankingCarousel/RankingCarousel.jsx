@@ -74,33 +74,32 @@ const RankingCarousel = ({ data }) => {
 
   return (
     <div>
-      <div className='banner-swiper-container'>
-        <div className='benner-swiper-wrap' ref={containerRef}>
+      <div className='ranking-swiper-container'>
+        <div className='ranking-swiper-wrap' ref={containerRef}>
           <button
             className={`carousel-button prev-button ${currentIndex === 0 ? 'hide' : ''}`}
             onClick={() => {
               prevSlide();
             }}
           />
-          <div className='banner-swiper-slide'>
+          <div className='ranking-swiper-slide'>
             <ul
               ref={slideRef}
-              className='banner-swiper-list'
+              className='ranking-swiper-list'
               style={{
                 transition: 'transform 0.5s ease-in-out',
                 transform: `translateX(-${(slideWidth + slideGap) * currentIndex}px)`,
               }}
             >
-              {data &&
-                data.slice(0, 10).map(item => (
-                  <li
-                    key={item.prfseq}
-                    className='banner-swiper-item'
-                    style={{ width: `${slideWidth}px`, flex: `0 0 ${slideWidth}px` }}
-                  >
-                    <RankingCard item={item} />
-                  </li>
-                ))}
+              {data?.slice(0, 10).map(item => (
+                <li
+                  key={item.prfseq}
+                  className='ranking-swiper-item'
+                  style={{ width: `${slideWidth}px`, flex: `0 0 ${slideWidth}px` }}
+                >
+                  <RankingCard item={item} />
+                </li>
+              ))}
             </ul>
           </div>
 

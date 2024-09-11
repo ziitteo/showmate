@@ -33,7 +33,7 @@ const ItemCarousel = ({ data }) => {
       // 슬라이드 너비 상태 업데이트
       setSlideWidth(calculatedSlideWidth);
 
-      // 브라우저 너비가 1180px 이상이면 4개, 768px 이상이면 2개, 그 미만이면 1개로 설정
+      // 브라우저 너비가 1180px 이상이면 5개, 768px 이상이면 2개, 그 미만이면 1개로 설정
       setSlideCount(containerWidth >= 1180 ? 5 : containerWidth >= 768 ? 2 : 1);
     }
   };
@@ -59,7 +59,7 @@ const ItemCarousel = ({ data }) => {
   const nextSlide = () => {
     // 마지막 슬라이드를 넘어가지 않도록 설정
     if (currentIndex < visibleDataLength - slideCount) {
-      setCurrentIndex(currentIndex => currentIndex + 1);
+      setCurrentIndex(currentIndex => currentIndex + 5);
     } else {
       setCurrentIndex(0);
     }
@@ -68,7 +68,7 @@ const ItemCarousel = ({ data }) => {
   // 이전 슬라이드로 이동하는 함수 (1개씩 이동, 무한 슬라이드 없음)
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex => currentIndex - 1);
+      setCurrentIndex(currentIndex => currentIndex - 5);
     }
   };
 
@@ -91,16 +91,15 @@ const ItemCarousel = ({ data }) => {
                 transform: `translateX(-${(slideWidth + slideGap) * currentIndex}px)`,
               }}
             >
-              {data &&
-                data.slice(0, 10).map(item => (
-                  <li
-                    key={item.prfseq}
-                    className='banner-swiper-item'
-                    style={{ width: `${slideWidth}px`, flex: `0 0 ${slideWidth}px` }}
-                  >
-                    <ItemCard item={item} />
-                  </li>
-                ))}
+              {data?.slice(0, 10).map(item => (
+                <li
+                  key={item.prfseq}
+                  className='item-swiper-item'
+                  style={{ width: `${slideWidth}px`, flex: `0 0 ${slideWidth}px` }}
+                >
+                  <ItemCard item={item} />
+                </li>
+              ))}
             </ul>
           </div>
 

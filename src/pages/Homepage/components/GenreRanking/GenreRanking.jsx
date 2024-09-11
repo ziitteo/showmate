@@ -7,9 +7,15 @@ import './GenreRanking.style.css';
 
 const GenreRanking = () => {
   const menuList = [
-    { label: '뮤지컬', categoryCode: 'GGGA' },
-    { label: '콘서트', categoryCode: 'CCCD' },
     { label: '연극', categoryCode: 'AAAA' },
+    { label: '뮤지컬', categoryCode: 'GGGA' },
+    { label: '대중음악', categoryCode: 'CCCA' },
+    { label: '국악', categoryCode: 'CCCC' },
+    { label: '콘서트', categoryCode: 'CCCD' },
+    { label: '서양/한국무용', categoryCode: 'BBBC' },
+    { label: '대중무용', categoryCode: 'BBBR' },
+    { label: '서커스/마술', categoryCode: 'EEEB' },
+    { label: '복합', categoryCode: 'EEEA' },
   ];
 
   const [activeMenu, setActiveMenu] = useState(menuList[0].label);
@@ -23,8 +29,6 @@ const GenreRanking = () => {
   const ShowMoreRanking = () => {
     navigate('/ranking');
   };
-
-  console.log(data);
 
   const handleMenuSelect = event => {
     setActiveMenu(event.target.textContent);
