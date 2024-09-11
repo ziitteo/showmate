@@ -12,6 +12,7 @@ import MySelectPage from './pages/MySelect/MySelectPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import Login from './pages/Login/Login';
+import TheaterPage from './pages/Theaters/TheaterPage';
 
 // 홈페이지
 // 뮤지컬 전체 페이지 /musicals
@@ -33,15 +34,12 @@ function App() {
         <Route path='/login' element={<Login setAuthenticate={setAuthenticate} />} />
         <Route path='/musicals'>
           <Route index element={<MusicalPage />} />
-          <Route path=':id' element={<MusicalDetailPage />} />
         </Route>
         <Route path='/theaters'>
           <Route index element={<TheaterPage />} />
-          <Route path=':id' element={<TheaterDetailPage />} />
         </Route>
         <Route path='/concerts'>
           <Route index element={<ConcertPage />} />
-          <Route path=':id' element={<ConcertDetailPage />} />
         </Route>
         <Route path='/regions' element={<RegionPage />} />
         <Route path='/rankings' element={<RankingPage />} />
