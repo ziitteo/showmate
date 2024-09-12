@@ -9,7 +9,7 @@ import { Spinner } from 'react-bootstrap';
 const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
   // 한 줄에 표시할 아이템 수 (초기값: 5)
   const [itemCount, setItemCount] = useState(5);
-  
+
   // 아이템의 너비를 상태로 저장
   const [itemWidth, setItemWidth] = useState(0);
 
@@ -53,13 +53,12 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
     return () => window.removeEventListener('resize', calculateItemWidth);
   }, [itemCount]); // itemCount가 변경될 때마다 실행
 
-
-   // 무한 스크롤을 감지하는 기능: 사용자가 페이지를 스크롤할 때 IntersectionObserver를 사용하여 특정 요소가 보이는지 감지
+  // 무한 스크롤을 감지하는 기능: 사용자가 페이지를 스크롤할 때 IntersectionObserver를 사용하여 특정 요소가 보이는지 감지
   useEffect(() => {
     // IntersectionObserver 생성하여 특정 요소가 화면에 보이면 콜백을 실행
-    const observer = new IntersectionObserver (
+    const observer = new IntersectionObserver(
       entries => {
-        // 만약 감지된 요소가 화면에 보이고(hasNextPage가 true) 
+        // 만약 감지된 요소가 화면에 보이고(hasNextPage가 true)
         //다음 페이지가 있는 경우(fetchNextPage 함수가 존재) 다음 페이지 데이터를 가져옴
         if (entries[0].isIntersecting && hasNextPage) {
           // fetchNextPage 함수를 호출하여 다음 페이지 데이터를 가져옴
@@ -71,7 +70,7 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
         threshold: 0,
         // rootMargin: '280px'은 뷰포트의 아래에서 280px만큼 떨어진 위치(푸터 높이를 고려하여 설정)
         rootMargin: '280px',
-      }
+      },
     );
 
     // observerRef가 존재하면 해당 요소를 감시 대상으로 설정
@@ -100,7 +99,7 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
         ))}
         {/* 무한 스크롤 감지 요소 */}
         <div ref={observerRef} className='loading-indicator'>
-          {hasNextPage ? <Spinner animation='border' variant='warning' /> : 'No more items to load'}
+          {hasNextPage ? <Spinner animation='border' variant='warning' /> : ''}
         </div>
       </div>
     </div>
