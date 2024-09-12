@@ -8,6 +8,7 @@ const AppLayout = () => {
       <Outlet />
     </div>
   );
+  );
 };
 
 export default AppLayout;
