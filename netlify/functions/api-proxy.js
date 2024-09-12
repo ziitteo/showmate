@@ -6,10 +6,12 @@ exports.handler = async function (event) {
   try {
     // Base API URL을 설정, 이 URL은 실제 외부 API 서버의 엔드포인트를 가리킴
     const baseURL = 'https://kopis.or.kr/openApi/restful';
-    
-    // event 객체에서 클라이언트가 보낸 쿼리 스트링 파라미터를 가져옴
-    // 'endpoint'는 API 엔드포인트를 지정하며, 나머지 쿼리 스트링 파라미터는 'params'에 저장
-    const { endpoint, ...params } = event.queryStringParameters;
+
+    // 클라이언트가 보낸 쿼리 스트링 파라미터에서 endpoint 및 다른 파라미터 추출
+    const params = event.queryStringParameters;
+
+    // 클라이언트에서 요청한 엔드포인트가 제대로 넘어가는지 확인 (필수 체크)
+    const endpoint = params.endpoint || 'pblprfr'; // 기본 엔드포인트를 설정할 수 있음
 
     // 실제 외부 API로 요청을 보내는 부분
     // 'baseURL'과 'endpoint'를 합쳐 최종 API URL을 만들고, 클라이언트가 보낸 추가 파라미터도 함께 전송
@@ -19,7 +21,7 @@ exports.handler = async function (event) {
         ...params, // 클라이언트에서 요청한 나머지 파라미터들을 추가
       },
     });
-    
+
     // API로부터 받은 응답 데이터를 클라이언트에 JSON 형식으로 반환
     // HTTP 상태 코드는 200(성공)을 반환하고, 응답 데이터는 JSON으로 변환하여 전송
     return {
@@ -31,7 +33,7 @@ exports.handler = async function (event) {
     // HTTP 상태 코드는 500(서버 에러)를 반환하고, 에러 메시지를 JSON으로 변환하여 전송
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }), // 에러 메시지를 클라이언트에 전달
+      body: JSON.stringify({ error: `API 요청 중 오류 발생: ${error.message}` }), // 에러 메시지를 클라이언트에 전달
     };
   }
 };
