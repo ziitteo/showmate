@@ -91,15 +91,19 @@ const RankingCarousel = ({ data }) => {
                 transform: `translateX(-${(slideWidth + slideGap) * currentIndex}px)`,
               }}
             >
-              {data?.slice(0, 10).map(item => (
-                <li
-                  key={item.prfseq}
-                  className='ranking-swiper-item'
-                  style={{ width: `${slideWidth}px`, flex: `0 0 ${slideWidth}px` }}
-                >
-                  <RankingCard item={item} />
-                </li>
-              ))}
+              {Array.isArray(data) && data.length > 0 ? (
+                data.slice(0, 10).map(item => (
+                  <li
+                    key={item.prfseq}
+                    className='ranking-swiper-item'
+                    style={{ width: `${slideWidth}px`, flex: `0 0 ${slideWidth}px` }}
+                  >
+                    <RankingCard item={item} />
+                  </li>
+                ))
+              ) : (
+                <div></div>
+              )}
             </ul>
           </div>
 

@@ -44,6 +44,13 @@ a {
   display: none;
 }
 
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .item-title {
   margin-top: 80px;
   font-size: 28px;
