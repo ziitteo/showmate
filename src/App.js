@@ -7,7 +7,7 @@ import Homepage from './pages/Homepage/Homepage';
 import MusicalPage from './pages/Musical/MusicalPage';
 import PlayPage from './pages/Play/PlayPage';
 import ConcertPage from './pages/Concert/ConcertPage';
-import DetailPage from './pages/Detail/DetailPage';
+import DetailPage from './pages/DetailPage/DetailPage';
 import RegionPage from './pages/Region/RegionPage';
 import RankingPage from './pages/Ranking/RankingPage';
 import MySelectPage from './pages/MySelect/MySelectPage';
@@ -46,10 +46,11 @@ function App() {
         <Route path='/composite' element={<CompositePage />} />
         <Route path='/gugak' element={<GugakPage />} />
         <Route path='/publicdance' element={<PublicDancePage />} />
-        <Route path='/goods' element={<DetailPage />} />
+        <Route path='/goods/:id' element={<DetailPage />} />
         <Route path='/region' element={<RegionPage />} />
         <Route path='/ranking' element={<RankingPage />} />
         <Route path='/my-select' element={<MySelectPage />} />
+
       </Route>
     </Routes>
   );
