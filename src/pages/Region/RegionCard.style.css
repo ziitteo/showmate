@@ -1,0 +1,97 @@
+.region-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  width: 70%;
+  margin: 20px auto;
+  position: relative;
+  padding-top: 50px;
+  }
+  
+  .region-card {
+  width: 230px;
+  height: 452px;
+  border: 1px solid #eee;
+  }
+  
+  .region-image-container {
+  width: 230px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  
+  .region-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  }
+  
+  .region-card-info {
+  padding: 16px;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  }
+  
+  .region-card-info h2 {
+  font-size: 0.9rem;
+  font-weight: bolder;
+  margin-bottom: 8px;
+  
+  }
+  
+  .region-card-info p {
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  }
+  
+  .region-card-info .region-date-info {
+  color: #999;
+  }
+  
+  .sort-buttons {
+    position: absolute;
+    top: 0; 
+    right: 10px; 
+    display: flex;
+    font-size: 0.8rem;
+    margin-bottom: 100px;
+}
+  
+  .sort-buttons button {
+  margin-right: 10px;
+  padding: 10px;
+  border: none;
+  color: black;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.3s;
+  }
+  
+  .sort-buttons button:hover {
+  color: #F7B5CA;
+  }
+  
+  .sort-buttons button.selected {
+  color: #F7B5CA;
+  }
+  
+  @media (max-width: 767px) {
+  .region-card {
+  flex: 1 1 calc(32% - 16px);
+  max-width: calc(32% - 16px);
+  }
+  }
+  
+  @media (max-width: 500px) {
+  .region-card {
+  flex: 1 1 calc(48% - 16px);
+  max-width: calc(48% - 16px);
+  }
+  }
