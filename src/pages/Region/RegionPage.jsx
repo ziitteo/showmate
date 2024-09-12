@@ -1,7 +1,11 @@
 import React from 'react';
+import RegionCard from './RegionCard';
+import './RegionPage.style.css'; 
 
 const RegionPage = () => {
-  return <div></div>;
+  return <div>
+    <RegionCard />
+  </div>;
 };
 
 export default RegionPage;

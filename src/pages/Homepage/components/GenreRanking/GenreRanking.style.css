@@ -1,0 +1,70 @@
+.ranking-container {
+  width: 100%;
+  margin-top: 80px;
+}
+
+.ranking-container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.ranking-container ul {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ranking-container button {
+  height: 44px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 1.05rem 1.8rem;
+  cursor: pointer;
+  border-radius: 32px;
+  border: 1px solid #e8e8e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ranking-container button.on {
+  background-color: #f7b5ca;
+  color: #fff;
+  border: none;
+}
+
+.button-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.more-button {
+  padding: 16px 40px;
+  border: 1px solid #ddd;
+  border-radius: 32px;
+  font-weight: 700;
+  font-size: 17px;
+  text-align: center;
+  color: #000;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.more-button::after {
+  content: '';
+  width: 100%;
+  height: 1.6rem;
+  background: url(https://openimage.interpark.com/UI/tour/pages/main/slide_arrow.svg) no-repeat 50%;
+}
+
+.ranking-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
