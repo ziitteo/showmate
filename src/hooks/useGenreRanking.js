@@ -17,9 +17,7 @@ const useGenreRankingQuery = (period, categoryCode, params = {}) => {
     queryKey: ["rankingData", defaultParams],
     queryFn: async () => {
       try {
-        console.log("Request Params:", defaultParams);
         const response = await fetchData("/boxoffice", defaultParams);
-        console.log("API Response:", response);
 
         if (
           response &&
@@ -27,11 +25,9 @@ const useGenreRankingQuery = (period, categoryCode, params = {}) => {
           typeof response.boxofs === "object" &&
           Array.isArray(response.boxofs.boxof)
         ) {
-          console.log("Valid Response:", response.boxofs.boxof);
           return response.boxofs.boxof;
         }
 
-        console.warn("Unexpected data structure or empty response:", response);
         return [];
       } catch (error) {
         console.error(
