@@ -1,3 +1,7 @@
+* {
+    transition: all 0.3s ease-in-out;
+}
+
 .ranking-genre-tab {
     display: flex;
     justify-content: center;
@@ -45,6 +49,7 @@
 
 .ranking-genre-button:hover {
     background-color: #f4f4f4;
+
 }
 
 .ranking-genre-button.active:hover {

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { fetchBoxOffice } from './fetchBoxOffice';
+// RankingPage.jsx
+import React, { useState } from 'react';
 import GenreRankingTab from './GenreRankingTab';
 import RankingList from './RankingList';
+import useRankingData from '../../hooks/useGenreRanking';
 import './RankingPage.style.css';
 
 const getGenreCode = (genre) => {
@@ -27,89 +28,53 @@ const getGenreCode = (genre) => {
   }
 };
 
-const getYesterdayDate = () => {
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  const year = yesterday.getFullYear();
-  const month = String(yesterday.getMonth() + 1).padStart(2, '0');
-  const day = String(yesterday.getDate()).padStart(2, '0');
-  return `${year}${month}${day}`;
-};
-
-const getCurrentDate = () => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
-  return `${year}${month}${day}`;
-};
-
 const RankingPage = () => {
   const [selectedGenre, setSelectedGenre] = useState('연극');
   const [selectedPeriod, setSelectedPeriod] = useState('day');
-  const [rankings, setRankings] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const loadRankingsData = async () => {
-      try {
-        setLoading(true);
-        const genreCode = getGenreCode(selectedGenre);
-        const date = selectedPeriod === 'day' ? getYesterdayDate() : getCurrentDate();
-        const data = await fetchBoxOffice(selectedPeriod, date, genreCode);
-
-        if (data && data.boxofs && Array.isArray(data.boxofs.boxof)) {
-          setRankings(data.boxofs.boxof);
-        } else {
-          setRankings([]);
-        }
-      } catch (error) {
-        console.error('데이터 로드 실패:', error);
-        setRankings([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadRankingsData();
-  }, [selectedGenre, selectedPeriod]);
-
-  const handlePeriodClick = (period) => {
-    setSelectedPeriod(period);
-  };
-
-  const handleGenreClick = (genre) => {
+  // 장르 변경 시 '일간'으로 설정하는 함수
+  const handleGenreChange = (genre) => {
     setSelectedGenre(genre);
-    setSelectedPeriod('day');
+    setSelectedPeriod('day'); // 장르가 변경될 때마다 '일간'으로 설정
   };
+
+
+  const genreCode = getGenreCode(selectedGenre);
+  const { data: rankings = [], isLoading } = useRankingData(selectedPeriod, genreCode);
 
   return (
-    <div className="ranking-page">
-      <h1>장르별 랭킹</h1>
-      <GenreRankingTab selectedGenre={selectedGenre} setSelectedGenre={handleGenreClick} />
-      <div className="period-selector">
+    <div className="ranking-page-container">
+      <h1 className="ranking-page-title">장르별 랭킹</h1>
+      <GenreRankingTab selectedGenre={selectedGenre} setSelectedGenre={handleGenreChange} />
+      <div className="ranking-page-period-selector">
         <button
-          onClick={() => handlePeriodClick('day')}
-          className={`${selectedPeriod === 'day' ? 'active' : ''}`}
+          onClick={() => setSelectedPeriod('day')}
+          className={`ranking-page-period-button ${selectedPeriod === 'day' ? 'ranking-page-active' : ''}`}
         >
           일간
         </button>
-        <span>|</span>
+        <span className="ranking-page-divider">|</span>
         <button
-          onClick={() => handlePeriodClick('week')}
-          className={selectedPeriod === 'week' ? 'active' : ''}
+          onClick={() => setSelectedPeriod('week')}
+          className={`ranking-page-period-button ${selectedPeriod === 'week' ? 'ranking-page-active' : ''}`}
         >
           주간
         </button>
-        <span>|</span>
+        <span className="ranking-page-divider">|</span>
         <button
-          onClick={() => handlePeriodClick('month')}
-          className={selectedPeriod === 'month' ? 'active' : ''}
+          onClick={() => setSelectedPeriod('month')}
+          className={`ranking-page-period-button ${selectedPeriod === 'month' ? 'ranking-page-active' : ''}`}
         >
           월간
         </button>
       </div>
-      {loading ? <div>로딩 중...</div> : <RankingList rankings={rankings} />}
+      {isLoading ? (
+        <div>로딩 중...</div>
+      ) : rankings.length ? (
+        <RankingList rankings={rankings} />
+      ) : (
+        <div>표시할 랭킹 데이터가 없습니다.</div>
+      )}
     </div>
   );
 };
