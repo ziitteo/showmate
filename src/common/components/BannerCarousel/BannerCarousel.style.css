@@ -1,0 +1,59 @@
+.banner-swiper-container {
+  width: 100%;
+  height: 100%;
+  margin-top: 40px;
+  overflow: visible;
+}
+
+.benner-swiper-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-swiper-slide {
+  height: 100%;
+  overflow: hidden;
+}
+
+.banner-swiper-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100%;
+  gap: 20px;
+}
+
+.banner-swiper-item {
+  width: auto;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.benner-swiper-wrap .carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #dcdee4;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.192) 0px 0.2rem 1.2rem -0.4rem !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  z-index: 10000 !important;
+}
+
+.prev-button {
+  left: -24px;
+  background: url(https://openimage.interpark.com/UI/tour/pages/main/slide_arrow.svg) no-repeat 50%;
+  transform: rotate(180deg);
+}
+
+.next-button {
+  right: -24px;
+  background: url(https://openimage.interpark.com/UI/tour/pages/main/slide_arrow.svg) no-repeat 50%;
+}
