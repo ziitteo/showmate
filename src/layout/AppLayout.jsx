@@ -1,13 +1,15 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-
+import Navbar from './Navbar';
+import Footer from './Footer';
+import Homepage from '../pages/Homepage/Homepage';
 const AppLayout = () => {
   return (
     <div>
-      navbar
-      <Outlet />
+      <Navbar/>
+      <Homepage/>
+      <Footer />
     </div>
-  );
+  )
 };
 
 export default AppLayout;
