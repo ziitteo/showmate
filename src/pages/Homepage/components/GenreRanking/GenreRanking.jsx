@@ -9,11 +9,11 @@ const GenreRanking = () => {
   const menuList = [
     { label: '연극', categoryCode: 'AAAA' },
     { label: '뮤지컬', categoryCode: 'GGGA' },
-    { label: '대중음악', categoryCode: 'CCCA' },
-    { label: '국악', categoryCode: 'CCCC' },
-    { label: '콘서트', categoryCode: 'CCCD' },
+    { label: '대중음악', categoryCode: 'CCCD' },
     { label: '서양/한국무용', categoryCode: 'BBBC' },
-    { label: '대중무용', categoryCode: 'BBBR' },
+    { label: '대중무용', categoryCode: 'BBBE' },
+    { label: '클래식', categoryCode: 'CCCA' },
+    { label: '국악', categoryCode: 'CCCC' },
     { label: '서커스/마술', categoryCode: 'EEEB' },
     { label: '복합', categoryCode: 'EEEA' },
   ];
