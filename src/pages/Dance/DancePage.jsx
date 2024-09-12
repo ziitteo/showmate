@@ -14,7 +14,11 @@ const DancePage = () => {
   const { data: playingData } = useGenreQuery('BBBC', { prfstate: '02' }); // 공연 중
 
   if (isLoading) {
-    return <Spinner animation='border' variant='warning' />;
+    return (
+      <div className='spinner-container'>
+        <Spinner animation='border' variant='warning' />
+      </div>
+    );
   }
 
   if (isError) {
