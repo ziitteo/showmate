@@ -8,7 +8,11 @@ const Homepage = () => {
   const { data, isLoading, isError, error } = usePerformanceQuery();
 
   if (isLoading) {
-    return <Spinner animation='border' variant='warning' />;
+    return (
+      <div className='spinner-container'>
+        <Spinner animation='border' variant='warning' />
+      </div>
+    );
   }
 
   if (isError) {

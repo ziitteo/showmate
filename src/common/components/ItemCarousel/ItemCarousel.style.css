@@ -1,7 +1,6 @@
 .item-swiper-container {
   width: 100%;
-  margin-top: 40px;
-  overflow: visible;
+  margin-top: 20px;
 }
 
 .item-swiper-wrap {
@@ -19,19 +18,19 @@
   display: flex;
   height: 100%;
   gap: 20px;
+  padding: 0;
+  margin: 0;
 }
 
 .item-swiper-item {
   width: auto;
   height: 100%;
-  border-radius: 8px;
-  overflow: hidden;
   cursor: pointer;
 }
 
-.carousel-button {
+.item-swiper-wrap .carousel-button {
   position: absolute;
-  top: 40%;
+  top: 33%;
   z-index: 10;
   width: 48px;
   height: 48px;
