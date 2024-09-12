@@ -2,10 +2,9 @@
     margin: 0;
     padding: 0 50px;
     box-sizing: border-box;
-    margin-top: 100px;
     width: 100%;
     max-width: 1400px;
-    margin: 150px auto 0 auto;
+    margin: 40px auto 0 auto;
 }
 
 .ranking-page-title {
