@@ -1,11 +1,24 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('./fonts/Pretendard-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Pretendard ExtraBold';
+  font-weight: 800;
+  font-display: swap;
+  src: local('Pretendard-ExtraBold'),
+    url('./fonts/Pretendard-ExtraBold.otf') format('opentype');
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Pretendard-Regular', sans-serif !important;
 }
 
 ul,
@@ -42,6 +55,13 @@ a {
 
 .hide {
   display: none;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .item-title {

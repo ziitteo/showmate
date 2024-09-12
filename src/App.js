@@ -16,6 +16,7 @@ import CircusMagicPage from './pages/CircusMagic/CircusMagicPage';
 import CompositePage from './pages/Composite/CompositePage';
 import GugakPage from './pages/Gugak/GugakPage';
 import PublicDancePage from './pages/PublicDance/PublicDancePage';
+import ClassicPage from './pages/Classic/ClassicPage';
 import Login from './pages/Login/Login';
 
 // 홈페이지
@@ -38,14 +39,15 @@ function App() {
       <Route path='/' element={<AppLayout />}>
         <Route index element={<Homepage />} />
         <Route path='/login' element={<Login setAuthenticate={setAuthenticate} />} />
-        <Route path='/musical' element={<MusicalPage />} />
         <Route path='/play' element={<PlayPage />} />
+        <Route path='/musical' element={<MusicalPage />} />
         <Route path='/concert' element={<ConcertPage />} />
         <Route path='/dance' element={<DancePage />} />
+        <Route path='/publicdance' element={<PublicDancePage />} />
+        <Route path='/classic' element={<ClassicPage />} />
+        <Route path='/gugak' element={<GugakPage />} />
         <Route path='/circusmagic' element={<CircusMagicPage />} />
         <Route path='/composite' element={<CompositePage />} />
-        <Route path='/gukak' element={<GugakPage />} />
-        <Route path='/publicdance' element={<PublicDancePage />} />
         <Route path='/goods' element={<DetailPage />} />
         <Route path='/region' element={<RegionPage />} />
         <Route path='/ranking' element={<RankingPage />} />
