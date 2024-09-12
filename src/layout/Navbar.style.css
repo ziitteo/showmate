@@ -33,14 +33,14 @@
   color: black;
   text-decoration: none;
   margin: 10px;
-  font-weight: bold;
 }
-
 .nav-bottom {
   display: flex;
   justify-content: space-between;
 }
-
+.nav-bottom a {
+  font-weight: bold;
+}
 .main-color {
   color: #F7B5CA !important;
 }
