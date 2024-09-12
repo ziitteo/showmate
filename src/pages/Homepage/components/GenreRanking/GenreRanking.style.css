@@ -61,3 +61,10 @@
   height: 1.6rem;
   background: url(https://openimage.interpark.com/UI/tour/pages/main/slide_arrow.svg) no-repeat 50%;
 }
+
+.ranking-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
