@@ -31,13 +31,13 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
       const containerWidth = containerRef.current.clientWidth;
       // 아이템 너비 = (컨테이너 너비 - (아이템 간격 * (아이템 개수 - 1))) / 아이템 개수
       const calculatedWidth = (containerWidth - slideGap * (itemCount - 1)) / itemCount;
-
+      // 화면 크기에 따른 슬라이드 개수
+      // 1180px 이상: 5개, 768px 이상: 2개, 768px 미만: 1개
+      const newSlideCount = containerWidth >= 1180 ? 5 : containerWidth >= 768 ? 2 : 1;
+      // 브라우저 너비에 따라 한 줄에 표시할 아이템 개수 설정
+      setItemCount(newSlideCount);
       // 계산된 아이템 너비를 상태로 저장
       setItemWidth(calculatedWidth);
-
-      // 브라우저 너비에 따라 한 줄에 표시할 아이템 개수 설정
-      // 1180px 이상: 5개, 768px 이상: 2개, 768px 미만: 1개
-      setItemCount(containerWidth >= 1180 ? 5 : containerWidth >= 768 ? 2 : 1);
     }
   };
 
