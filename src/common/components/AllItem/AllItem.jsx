@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 import ItemCard from '../ItemCard/ItemCard';
 import './AllItem.style.css';
-import { Spinner } from 'react-bootstrap';
 
 // data: API에서 받아온 데이터
 // fetchNextPage: 다음 페이지 데이터를 가져오는 함수
@@ -31,13 +31,13 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
       const containerWidth = containerRef.current.clientWidth;
       // 아이템 너비 = (컨테이너 너비 - (아이템 간격 * (아이템 개수 - 1))) / 아이템 개수
       const calculatedWidth = (containerWidth - slideGap * (itemCount - 1)) / itemCount;
-
+      // 화면 크기에 따른 슬라이드 개수
+      // 1180px 이상: 5개, 768px 이상: 2개, 768px 미만: 1개
+      const newSlideCount = containerWidth >= 1180 ? 5 : containerWidth >= 768 ? 2 : 1;
+      // 브라우저 너비에 따라 한 줄에 표시할 아이템 개수 설정
+      setItemCount(newSlideCount);
       // 계산된 아이템 너비를 상태로 저장
       setItemWidth(calculatedWidth);
-
-      // 브라우저 너비에 따라 한 줄에 표시할 아이템 개수 설정
-      // 1180px 이상: 5개, 768px 이상: 2개, 768px 미만: 1개
-      setItemCount(containerWidth >= 1180 ? 5 : containerWidth >= 768 ? 2 : 1);
     }
   };
 
@@ -59,7 +59,7 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
     const observer = new IntersectionObserver(
       entries => {
         // 만약 감지된 요소가 화면에 보이고(hasNextPage가 true)
-        //다음 페이지가 있는 경우(fetchNextPage 함수가 존재) 다음 페이지 데이터를 가져옴
+        // 다음 페이지가 있는 경우(fetchNextPage 함수가 존재) 다음 페이지 데이터를 가져옴
         if (entries[0].isIntersecting && hasNextPage) {
           // fetchNextPage 함수를 호출하여 다음 페이지 데이터를 가져옴
           fetchNextPage();
@@ -92,11 +92,15 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
     <div className='all-item-container' ref={containerRef}>
       <div className='item-grid'>
         {/* 데이터를 받아와서 아이템 렌더링 */}
-        {data.map((item, index) => (
-          <div key={index} style={{ width: `${itemWidth}px`, marginBottom: '20px' }}>
-            <ItemCard item={item} />
-          </div>
-        ))}
+        {Array.isArray(data) && data.length > 0 ? (
+          data.map((item, index) => (
+            <div key={index} style={{ width: `${itemWidth}px`, marginBottom: '20px' }}>
+              <ItemCard item={item} />
+            </div>
+          ))
+        ) : (
+          <div></div>
+        )}
         {/* 무한 스크롤 감지 요소 */}
         <div ref={observerRef} className='loading-indicator'>
           {hasNextPage ? <Spinner animation='border' variant='warning' /> : ''}
