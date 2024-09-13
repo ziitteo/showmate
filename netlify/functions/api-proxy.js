@@ -7,9 +7,16 @@ exports.handler = async function (event) {
     // Base API URL 설정
     const baseURL = 'http://kopis.or.kr/openApi/restful';
 
-    // 클라이언트에서 전달된 쿼리 스트링 파라미터를 추출
-    const params = event.queryStringParameters;
-    const endpoint = params.endpoint || 'pblprfr'; // 기본 엔드포인트 제공
+    // 클라이언트에서 전달된 쿼리 스트링 파라미터 추출 (디스트럭처링 사용)
+    const { endpoint, ...params } = event.queryStringParameters;
+
+    // 엔드포인트가 없는 경우 오류 반환
+    if (!endpoint) {
+      return {
+        statusCode: 400, // Bad Request
+        body: JSON.stringify({ error: '엔드포인트가 지정되지 않았습니다.' }),
+      };
+    }
 
     // 외부 API로 XML 응답을 받기
     const response = await axios.get(`${baseURL}/${endpoint}`, {
