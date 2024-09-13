@@ -14,7 +14,7 @@ const api = axios.create({
   // 로컬 환경에서는 '/api/openApi/restful'로 설정
   baseURL:
     process.env.NODE_ENV === 'production'
-      ? '/.netlify/functions/api-proxy' // Netlify 배포 환경일 때 Netlify Functions로 프록시
+      ? '/api' // Vercel이 프록시를 통해 /api 요청을 Kopis API로 전달
       : '/api/openApi/restful', // 로컬 개발 환경에서는 setupProxy.js 파일을 통해 Kopis API로 프록시
   // 서버에서 XML 형식의 응답을 JSON으로 변환하기 위해 Accept 헤더 설정
   headers: {
