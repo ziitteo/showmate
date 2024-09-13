@@ -63,7 +63,8 @@ const RegionCard = () => {
 
   return (
     <div>
-                      <div className="filter-buttons">
+          {/* 버튼 영역 시작 */}
+           <div className="filter-buttons">
           <button className={selectedRegion === 'all' ? 'selected' : ''} onClick={() => setSelectedRegion('all')}>
             전체
           </button>
@@ -95,7 +96,8 @@ const RegionCard = () => {
             임박순
           </button>
         </div>
-
+        {/* 버튼 영역 끝 */}
+        {/* 카드 부분 시작 */}
         {filteredData.map(performance => (
           <div key={performance.id} className="region-card">
             <div className='region-image-container'>
@@ -109,6 +111,7 @@ const RegionCard = () => {
           </div>
         ))}
       </div>
+      {/* 카드 부분 끝 */}
     </div>
   );
 };
