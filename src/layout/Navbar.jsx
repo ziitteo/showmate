@@ -6,7 +6,8 @@ import { Container } from 'react-bootstrap';
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const genres = ['연극', '뮤지컬', '콘서트', '서양/한국무용', '대중무용', '클래식', '국악', '서커스/마술','복합예술공연'];
-  const genres_eng = ['theaters', 'musicals', 'concerts'];
+  const genres_eng = ['play', 'musical', 'concert', 'dance', 'publicdance', 'classic', 'gugak', 'circusmagic', 'composite'];
+
   const navigate = useNavigate();
 
   const handleSearch = e => {
