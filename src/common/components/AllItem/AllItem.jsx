@@ -9,7 +9,7 @@ import './AllItem.style.css';
 const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
   // 한 줄에 표시할 아이템 수 (초기값: 5)
   const [itemCount, setItemCount] = useState(5);
-
+  
   // 아이템의 너비를 상태로 저장
   const [itemWidth, setItemWidth] = useState(0);
 

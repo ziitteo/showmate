@@ -7,7 +7,7 @@ import Homepage from './pages/Homepage/Homepage';
 import MusicalPage from './pages/Musical/MusicalPage';
 import PlayPage from './pages/Play/PlayPage';
 import ConcertPage from './pages/Concert/ConcertPage';
-import DetailPage from './pages/Detail/DetailPage';
+import DetailPage from './pages/DetailPage/DetailPage';
 import RegionPage from './pages/Region/RegionPage';
 import RankingPage from './pages/Ranking/RankingPage';
 import MySelectPage from './pages/MySelect/MySelectPage';
@@ -18,7 +18,7 @@ import GugakPage from './pages/Gugak/GugakPage';
 import PublicDancePage from './pages/PublicDance/PublicDancePage';
 import ClassicPage from './pages/Classic/ClassicPage';
 import Login from './pages/Login/Login';
-
+import { GlobalProvider } from './pages/DetailPage/GlobalContext';
 // 홈페이지
 // 뮤지컬 전체 페이지 /musicals
 // 연극 전체 페이지 /theaters
@@ -35,25 +35,27 @@ function App() {
   }, [authenticate]);
 
   return (
-    <Routes>
-      <Route path='/' element={<AppLayout />}>
-        <Route index element={<Homepage />} />
-        <Route path='/login' element={<Login setAuthenticate={setAuthenticate} />} />
-        <Route path='/play' element={<PlayPage />} />
-        <Route path='/musical' element={<MusicalPage />} />
-        <Route path='/concert' element={<ConcertPage />} />
-        <Route path='/dance' element={<DancePage />} />
-        <Route path='/publicdance' element={<PublicDancePage />} />
-        <Route path='/classic' element={<ClassicPage />} />
-        <Route path='/gugak' element={<GugakPage />} />
-        <Route path='/circusmagic' element={<CircusMagicPage />} />
-        <Route path='/composite' element={<CompositePage />} />
-        <Route path='/goods' element={<DetailPage />} />
-        <Route path='/region' element={<RegionPage />} />
-        <Route path='/ranking' element={<RankingPage />} />
-        <Route path='/my-select' element={<MySelectPage />} />
-      </Route>
-    </Routes>
+    <GlobalProvider>
+      <Routes>
+        <Route path='/' element={<AppLayout />}>
+          <Route index element={<Homepage />} />
+          <Route path='/login' element={<Login setAuthenticate={setAuthenticate} />} />
+          <Route path='/play' element={<PlayPage />} />
+          <Route path='/musical' element={<MusicalPage />} />
+          <Route path='/concert' element={<ConcertPage />} />
+          <Route path='/dance' element={<DancePage />} />
+          <Route path='/publicdance' element={<PublicDancePage />} />
+          <Route path='/classic' element={<ClassicPage />} />
+          <Route path='/gugak' element={<GugakPage />} />
+          <Route path='/circusmagic' element={<CircusMagicPage />} />
+          <Route path='/composite' element={<CompositePage />} />
+          <Route path='/goods/:id' element={<DetailPage />} />
+          <Route path='/region' element={<RegionPage />} />
+          <Route path='/ranking' element={<RankingPage />} />
+          <Route path='/my-select' element={<MySelectPage />} />
+        </Route>
+      </Routes>
+    </GlobalProvider>
   );
 }
 
