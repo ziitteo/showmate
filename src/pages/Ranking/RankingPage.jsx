@@ -24,7 +24,7 @@ const getGenreCode = (genre) => {
     case '서커스/마술':
       return 'EEEB';
     case '복합예술공연':
-      return 'A000';
+      return 'EEEA';
     default:
       return 'AAAA';
   }
