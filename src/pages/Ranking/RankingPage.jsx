@@ -13,16 +13,18 @@ const getGenreCode = (genre) => {
       return 'GGGA';
     case '콘서트':
       return 'CCCD';
-    case '무용':
+    case '서양/한국무용':
       return 'BBBC';
     case '대중무용':
       return 'BBBE';
-    case '서양음악':
+    case '클래식':
       return 'CCCA';
-    case '한국음악':
+    case '국악':
       return 'CCCC';
     case '서커스/마술':
       return 'EEEB';
+    case '복합예술공연':
+      return 'EEEA';
     default:
       return 'AAAA';
   }

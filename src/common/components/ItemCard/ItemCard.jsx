@@ -3,7 +3,6 @@ import './ItemCard.style.css';
 import { useNavigate } from 'react-router-dom';
 
 const ItemCard = ({ item }) => {
-
   const navigate = useNavigate();
 
   const showDetail = item => {

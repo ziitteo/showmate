@@ -20,7 +20,11 @@ const RankingCard = ({ item }) => {
     >
       <div className='image-wrap'>
         <div className='image-container'>
-          <img src={`http://www.kopis.or.kr/${item.poster}`} alt={item.prfnm} className='card-image' />
+          {item.poster ? (
+            <img src={`https://www.kopis.or.kr/${item.poster}`} alt={item.prfnm} className='card-image' />
+          ) : (
+            <p></p>
+          )}
         </div>
         <div className='ranking-info'>
           <h1 className='rank'>{item.rnum}</h1>
