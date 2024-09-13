@@ -1,7 +1,11 @@
+.all-item-container {
+  width: 100%;
+  margin: 40px 0 80px;
+}
+
 .item-grid {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 40px;
   gap: 20px;
 }
 

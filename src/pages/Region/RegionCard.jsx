@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import './RegionCard.style.css'; 
 import useRegionQuery from '../../hooks/useRegionQuery';
+import { Spinner } from 'react-bootstrap';
 
 const RegionCard = () => {
   const [sortBy, setSortBy] = useState('rank'); // Default sorting by rank
   const { data, isLoading, isError } = useRegionQuery();
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return (
+      <div className='spinner-container'>
+        <Spinner animation='border' variant='warning' />
+      </div>
+    );
   }
 
   if (isError) {
