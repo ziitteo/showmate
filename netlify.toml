@@ -4,9 +4,12 @@
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api-proxy"
+<<<<<<< HEAD
   status = 200
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
+=======
+>>>>>>> fe937d9791008d321ccccb6245dcb74785a5b780
   status = 200
