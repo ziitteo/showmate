@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import fetchData from '../utils/api'; // 공통 API 요청 함수
-import { getStartDate, getEndDate } from '../utils/util'; // 날짜 관련 유틸 함수
+import fetchData from '../utils/api'; 
+import { getStartDate, getEndDate } from '../utils/util'; 
 
 // 공연 정보를 가져오는 React Query 훅
 const useRegionQuery = (params = {}) => {
@@ -10,14 +10,14 @@ const useRegionQuery = (params = {}) => {
   const defaultParams = {
     stdate,
     eddate,
-    rows: 48, // 한 번에 가져올 데이터 수 (최대 100)
-    cpage: 1, // 현재 페이지
-    ...params, // 추가적인 파라미터 병합
+    rows: 100, 
+    cpage: 1, 
+    ...params, 
   };
 
   return useQuery({
     queryKey: ['performances', defaultParams],
-    queryFn: () => fetchData('/pblprfr', defaultParams), // KOPIS API로부터 공연 정보 가져오기
+    queryFn: () => fetchData('/pblprfr', defaultParams), 
     select: data => {
       // KOPIS API 응답에서 필요한 정보만 추출
       return data.dbs?.db.map(item => ({
@@ -30,6 +30,7 @@ const useRegionQuery = (params = {}) => {
         area: item.area,           // 공연 지역 
         rank: item.rnum,           // 공연 인기순
         saleStatus: item.saleStatus, // 판매 상태
+        signgucode : item.signgucode, // 시군구 코드 
       })) || [];
     },
   });
