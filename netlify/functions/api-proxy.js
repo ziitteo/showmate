@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { parseXML } = require('./src/utils/util');
+const { parseXML } = require('../../src/utils/util');
 
 // Netlify 함수 핸들러 정의
 exports.handler = async function (event) {
