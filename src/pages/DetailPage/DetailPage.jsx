@@ -1,35 +1,36 @@
-// DetailPage.jsx
 import React, { useEffect } from 'react';
 import { useGlobal } from './GlobalContext';
 import axios from "../../utils/axios";
 import { parseXML } from "../../utils/util";
 import { Container } from 'react-bootstrap';
+
 const DetailPage = () => {
-  // const { data, updateData } = useGlobal();
-
   const context = useGlobal();
-  if (!context) {
-    return <div>Context is not available</div>;
-  }
 
-  const { data, updateData } = context;
-
-  
   useEffect(() => {
     async function fetchData() {
       try {
         const request = await axios.get(`/pblprfr/PF132236`); // API 호출 예시
         const result = parseXML(request.data); // XML 변환
-        const data = result.dbs.db
+        const data = result.dbs.db;
         console.log('최종 data', data);
-        updateData(data); // 데이터를 Context에 저장
+        if (context) {
+          context.updateData(data); // 데이터를 Context에 저장
+        }
       } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
       }
     }
 
     fetchData();
-  }, []); // 빈 배열을 의존성 배열로 설정
+  }, [context]); // context가 변경될 때만 useEffect 실행
+
+  // context가 없으면 에러 처리
+  if (!context) {
+    return <div>Context is not available</div>;
+  }
+
+  const { data } = context;
 
   if (!data) return <h2>Loading...</h2>;
 
