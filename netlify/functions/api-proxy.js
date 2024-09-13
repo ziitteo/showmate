@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { parseXML } = require('./src/utils/util');
 
 // Netlify 함수 핸들러 정의
 exports.handler = async function (event) {
@@ -21,10 +22,13 @@ exports.handler = async function (event) {
       },
     });
 
+    // XML 데이터를 JSON으로 변환
+    const jsonData = parseXML(response.data);
+
     // 성공적인 응답을 반환 (JSON 형식으로)
     return {
       statusCode: 200,
-      body: JSON.stringify(response.data),
+      body: JSON.stringify(jsonData),
     };
   } catch (error) {
     // 에러 발생 시 로그 출력
