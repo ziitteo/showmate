@@ -31,14 +31,14 @@ const BannerCarousel = ({ data }) => {
       // 컨테이너 너비를 기준으로 슬라이드 너비 계산
       const containerWidth = containerRef.current.clientWidth;
 
+      // 브라우저 너비가 1180px 이상이면 4개, 768px 이상이면 2개, 그 미만이면 1개로 설정
+      const newSlideCount = containerWidth >= 1180 ? 4 : containerWidth >= 768 ? 2 : 1;
       // 슬라이드 너비 = (컨테이너 너비 - (슬라이드 간격 * (슬라이드 개수 -1)) / 슬라이드 개수
       const calculatedSlideWidth = (containerWidth - slideGap * (slideCount - 1)) / slideCount;
 
+      setSlideCount(newSlideCount);
       // 슬라이드 너비 상태 업데이트
       setSlideWidth(calculatedSlideWidth);
-
-      // 브라우저 너비가 1180px 이상이면 4개, 768px 이상이면 2개, 그 미만이면 1개로 설정
-      setSlideCount(containerWidth >= 1180 ? 4 : containerWidth >= 768 ? 2 : 1);
     }
   };
 
