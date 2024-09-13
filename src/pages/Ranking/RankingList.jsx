@@ -1,6 +1,6 @@
-// RankingList.jsx
 import React from 'react';
 import './RankingList.style.css';
+import ItemCard from '../../common/components/ItemCard/ItemCard';
 
 const RankingList = ({ rankings }) => {
     if (!rankings || rankings.length === 0) {
@@ -14,6 +14,12 @@ const RankingList = ({ rankings }) => {
                     rankingItem.poster && rankingItem.poster.startsWith('/upload')
                         ? `http://www.kopis.or.kr${rankingItem.poster}`
                         : rankingItem.poster || '이미지 없음';
+
+
+                const item = {
+                    ...rankingItem,
+                    poster: imageUrl,
+                };
 
                 const title = Array.isArray(rankingItem.prfnm)
                     ? rankingItem.prfnm.join('')
@@ -34,14 +40,7 @@ const RankingList = ({ rankings }) => {
                             {index + 1}
                         </div>
                         <div className="ranking-list-item">
-                            <img
-                                src={imageUrl}
-                                alt={title}
-                                className="ranking-list-poster"
-                                onError={(e) => {
-                                    e.target.src = '이미지 없음';
-                                }}
-                            />
+                            <ItemCard item={item} />
                             <div className="ranking-list-info">
                                 <div className="ranking-list-item-title">{title}</div>
                                 <div className="ranking-list-details">
