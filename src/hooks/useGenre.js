@@ -2,7 +2,6 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import fetchData from '../utils/api';
 import { getStartDate, getEndDate } from '../utils/util';
 
-
 // 장르별 공연 정보를 가져오는 커스텀 훅
 // categoryCode: 장르별 카테고리 코드 (뮤지컬, 콘서트 등)
 // params: 추가적인 파라미터 객체
@@ -18,7 +17,6 @@ const useGenreQuery = (categoryCode, params = {}) => {
     rows: 40, // 한 번에 가져올 데이터 수
     ...params, // 추가적인 파라미터가 있을 경우 병합하여 API 요청에 사용
   };
-
 
   // useInfiniteQuery 훅 사용하여 무한 스크롤 데이터를 가져오는 로직을 구현
   // queryKey: 쿼리 키 설정, 캐시를 식별하는데 사용
@@ -43,7 +41,7 @@ const useGenreQuery = (categoryCode, params = {}) => {
       if (!lastPage || !lastPage.totalCount) {
         // totalCount가 없을 경우 임시로 다음 페이지를 설정하여 계속 페칭하도록 처리
         const nextPage = allPages.length + 1;
-        
+
         // 데이터를 40개씩 요청하므로, lastPage의 데이터 개수가 40보다 적으면 마지막 페이지로 간주
         // 만약 totalCount가 없을 때 페이지네이션이 어떻게 처리되는지 알 수 없으므로, 임시로 40개 기준으로 계산
         return lastPage?.dbs?.db?.length === 40 ? nextPage : undefined;

@@ -6,7 +6,7 @@ module.exports = function (app) {
     app.use(
       '/api',
       createProxyMiddleware({
-        target: 'https://kopis.or.kr',
+        target: 'http://kopis.or.kr',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '', // '/api'로 시작하는 경로 제거
