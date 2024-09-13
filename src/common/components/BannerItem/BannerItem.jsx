@@ -12,7 +12,9 @@ const BannerItem = ({ item }) => {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div key={item.mt20id} role='button' tabIndex='0' className='banner-item' onClick={() => showDetail(item)}>
-      <img src={item.poster} alt={item.prfnm} className='banner-image' />
+      <div className='image-container'>
+        <img src={item.poster} alt={item.prfnm} className='banner-image' />
+      </div>
       <div className='banner-info'>
         <h2 className='banner-title'>{item.prfnm}</h2>
         <p className='banner-location'>{item.fcltynm}</p>

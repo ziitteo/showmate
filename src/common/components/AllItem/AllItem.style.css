@@ -1,0 +1,17 @@
+.all-item-container {
+  width: 100%;
+  margin: 40px 0 80px;
+}
+
+.item-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.loading-indicator {
+  height: 50px; /* 높이를 명시적으로 설정 */
+  width: 100%;
+  text-align: center;
+  line-height: 50px; /* 높이와 동일하게 설정하여 텍스트 가운데 정렬 */
+}

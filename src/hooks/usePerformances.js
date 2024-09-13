@@ -10,7 +10,7 @@ const usePerformanceQuery = (params = {}) => {
   const defaultParams = {
     stdate,
     eddate,
-    rows: 100, // 최대 100개의 데이터를 가져옴
+    rows: 10, // 최대 10개의 데이터를 가져옴
     cpage: 1, // 페이지 번호
     ...params, // 추가적인 파라미터가 있을 경우 병합
   };

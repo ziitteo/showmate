@@ -56,3 +56,31 @@ a {
 .hide {
   display: none;
 }
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.item-title {
+  margin-top: 80px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.image-container {
+  width: 100%;
+  aspect-ratio: 3 / 4; /* 3:4 비율 설정 */
+}
+
+/* 반응형 */
+/* 1180 이하인 경우 */
+@media screen and (max-width: 1180px) {
+  .image-container {
+    aspect-ratio: 1 / 1; /* 3:4 비율 설정 */
+  }
+}
