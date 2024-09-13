@@ -1,0 +1,6 @@
+.detail-right-item {
+  display: flex;
+}
+.detail-right-item strong {
+  width: 100px;
+}
