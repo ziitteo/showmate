@@ -49,8 +49,6 @@ function App() {
           <Route path='/gugak' element={<GugakPage />} />
           <Route path='/circusmagic' element={<CircusMagicPage />} />
           <Route path='/composite' element={<CompositePage />} />
-          <Route path='/gugak' element={<GugakPage />} />
-          <Route path='/publicdance' element={<PublicDancePage />} />
           <Route path='/goods/:id' element={<DetailPage />} />
           <Route path='/region' element={<RegionPage />} />
           <Route path='/ranking' element={<RankingPage />} />
