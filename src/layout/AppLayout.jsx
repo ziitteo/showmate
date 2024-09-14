@@ -1,11 +1,11 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from '../layout/Navbar'
-import Footer from '../layout/Footer'
-const AppLayout = () => {
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Navbar from "../layout/Navbar";
+import Footer from "../layout/Footer";
+const AppLayout = ({ authenticate, setAuthenticate }) => {
   return (
     <div>
-      <Navbar />
+      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate} />
       <Outlet />
       <Footer />
     </div>
