@@ -18,7 +18,8 @@ const RankingCarousel = ({ data }) => {
   // 슬라이드 리스트를 참조하는 Ref
   const slideRef = useRef(null);
 
-  const visibleDataLength = Math.min(10, data.length); // 실제로 보여줄 데이터 개수 (최대 10개)
+  // data가 배열인지 확인하여 유효한 데이터 개수를 가져옴
+  const visibleDataLength = Array.isArray(data) ? Math.min(10, data.length) : 0; // data 유효성 검사 추가
 
   // 슬라이드 너비 계산 및 브라우저 크기 변경에 따른 재설정
   const calculateSlideWidth = () => {
