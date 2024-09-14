@@ -92,7 +92,7 @@
 }
 
 /* 반응형 : 1090 이하인 경우 */
-@media screen and (max-width: 1090px) {
+@media screen and (max-width: 1200px) {
   .nav-top-items a,
   .nav-top-items span {
     display: none;
@@ -105,7 +105,7 @@
     max-width: 45rem;
   }
 }
-@media screen and (max-width: 856px) {
+@media screen and (max-width: 993px) {
   .nav-bottom {
     display: none;
   }
