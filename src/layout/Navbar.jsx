@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import "./Navbar.style.css";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
+import "./Navbar.style.css";
+import "./Hamburger.style.css"
 
 const Navbar = ({ authenticate, setAuthenticate }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  // value for humburger toggle 
+  const [rightOpen, setRightOpen] = useState(false);
+
   const genres = [
     "연극",
     "뮤지컬",
@@ -48,6 +53,7 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
   };
   return (
     <Container>
+
       <div className="nav-top">
         <a className="nav-logo" href="/">
           <img width="200px" src={"/text-wide.jpeg"} alt="logo" />
@@ -79,6 +85,31 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
           >
             ☆
           </button>
+
+          {/* 사이드바 */}
+          <div  className={`sidenav ${rightOpen ? 'open' : ''}`} tag="nav">
+            <span href="#!" className="closebtn" onClick={() => setRightOpen(false)}>
+              &times;
+            </span>
+            {genres.map((genre, idx) => (
+              <span
+                key={idx}
+                onClick={() => handleGenreClick(genres_eng[idx])} // navigate 사용
+              >
+                {genre}
+              </span>
+            ))}
+            <span className="text-bold" onClick={() => handleGenreClick("ranking")}>랭킹</span>
+            <span className="text-bold" onClick={() => handleGenreClick("region")}>지역별</span>
+          </div>
+
+          {/* 사이드바 열기 버튼 */}
+          <div className="nav-hamburger">
+            <MDBBtn onClick={() => setRightOpen(!rightOpen)}>
+              <MDBIcon icon='hamburger' />
+            </MDBBtn>
+          </div>
+
           {authenticate ? (
             <a href="#" onClick={handleLogout}>
               로그아웃

@@ -1,0 +1,54 @@
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #F7B5CA;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.sidenav span {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+.sidenav span:hover {
+  color: #f1f1f1;
+}
+.text-bold {
+  font-weight:bolder;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.sidenav.open {
+  width: 250px;
+}
+.nav-hamburger{
+  display: none;
+}
+.nav-hamburger button{
+  background-color: #F7B5CA;
+  box-shadow: none;
+}
+.nav-hamburger button:hover{
+  background-color: #E4CCFD;
+  box-shadow: 8px 9px -4px rgba(0, 0, 0, 0.15), 0 4px 18px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 반응형 : 1200 이하인 경우 */
+@media screen and (max-width: 1200px) {
+  .nav-hamburger {
+    display: block ;
+  }
+}
