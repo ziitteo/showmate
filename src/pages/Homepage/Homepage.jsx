@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, Spinner } from 'react-bootstrap';
+import { Alert, Container, Spinner } from 'react-bootstrap';
 import usePerformanceQuery from '../../hooks/usePerformances';
 import BannerCarousel from '../../common/components/BannerCarousel/BannerCarousel';
 import GenreRanking from './components/GenreRanking/GenreRanking';
@@ -20,10 +20,10 @@ const Homepage = () => {
   }
 
   return (
-    <div className='section'>
+    <Container>
       <BannerCarousel data={data} />
       <GenreRanking />
-    </div>
+    </Container>
   );
 };
 

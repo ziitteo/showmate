@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import useSearchQuery from '../../hooks/useSearch';
 import ItemCard from '../../common/components/ItemCard/ItemCard';
 import './SearchResultsPage.style.css';
+import { Container } from 'react-bootstrap';
 
 const genres = [
     { label: '전체', value: '' },
@@ -102,6 +103,7 @@ const SearchResultsPage = () => {
     if (isError) return <p>Something went wrong. Please try again.</p>;
 
     return (
+      <Container>
         <div className="search-page-container">
             <aside className="filter-section">
                 <h5 className="filter-title">필터</h5>
@@ -218,6 +220,8 @@ const SearchResultsPage = () => {
                 </div>
             </section>
         </div>
+      </Container>
+        
     );
 };
 
