@@ -173,41 +173,6 @@
     margin-top: 5px;
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 20px;
-    padding: 10px 0;
-}
-
-.pagination button {
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    color: #333;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.pagination button.active {
-    background-color: #F7b5ca;
-    color: #fff;
-    border-color: #F7b5ca;
-}
-
-.pagination button:hover {
-    background-color: #f0f0f0;
-    color: #000;
-}
-
-.pagination button:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
 .search-item-card-wrapper .card-info {
     display: none;
 }
@@ -216,6 +181,32 @@
     display: none;
 }
 
+.scroll-to-top-button {
+    position: fixed;
+    bottom: 20px;
+    right: 70px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F7b5ca;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+    font-size: 20px;
+}
+
+.scroll-to-top-button:hover {
+    background-color: #F7b5ca;
+}
+
+.scroll-to-top-button:active {
+    background-color: #F7b5ca;
+}
 
 
 @media (max-width: 1024px) {

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useSearchQuery from '../../hooks/useSearch';
 import ItemCard from '../../common/components/ItemCard/ItemCard';
 import './SearchResultsPage.style.css';
 import { Container } from 'react-bootstrap';
+import { PacmanLoader } from 'react-spinners';
 
 const genres = [
     { label: '전체', value: '' },
@@ -55,6 +56,9 @@ const SearchResultsPage = () => {
     const [selectedRegion, setSelectedRegion] = useState('');
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [items, setItems] = useState([]);
+    const [showScrollTopButton, setShowScrollTopButton] = useState(false); // 스크롤 버튼 상태
+    const observerRef = useRef(null);
 
     const { data: searchResults, isLoading, isError } = useSearchQuery(
         searchTerm,
@@ -64,19 +68,50 @@ const SearchResultsPage = () => {
         selectedRegion
     );
 
+    // 검색어가 변경될 때마다 상태 초기화
+    useEffect(() => {
+        setItems([]); // 새로운 검색어에 맞게 아이템 초기화
+        setCurrentPage(1); // 첫 페이지로 초기화
+    }, [searchTerm]);
+
+    // 데이터 확인 및 items 배열 체크
+    useEffect(() => {
+        if (searchResults && Array.isArray(searchResults.items)) {
+            setItems((prevItems) => [...prevItems, ...searchResults.items]);
+        }
+    }, [searchResults]);
+
+    // 무한 스크롤 로직
+    const lastItemRef = useCallback(
+        (node) => {
+            if (isLoading) return;
+            if (observerRef.current) observerRef.current.disconnect();
+            observerRef.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setCurrentPage((prevPage) => prevPage + 1);
+                }
+            });
+            if (node) observerRef.current.observe(node);
+        },
+        [isLoading]
+    );
+
     const handleGenreChange = (genre) => {
         setSelectedGenre(genre);
         setCurrentPage(1);
+        setItems([]);
     };
 
     const handleSaleStatusChange = (status) => {
         setSelectedSaleStatus(status);
         setCurrentPage(1);
+        setItems([]);
     };
 
     const handleRegionChange = (region) => {
         setSelectedRegion(region);
         setCurrentPage(1);
+        setItems([]);
     };
 
     const handleReset = () => {
@@ -84,6 +119,7 @@ const SearchResultsPage = () => {
         setSelectedSaleStatus('');
         setSelectedRegion('');
         setCurrentPage(1);
+        setItems([]);
     };
 
     const toggleFilter = () => {
@@ -101,27 +137,34 @@ const SearchResultsPage = () => {
     }, []);
 
     const handleSearch = () => {
+        setItems([]);
+        setCurrentPage(1);
         navigate(
             `?query=${searchTerm}&genre=${selectedGenre}&status=${selectedSaleStatus}&region=${selectedRegion}`
         );
     };
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-        handleSearch();
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowScrollTopButton(true);
+            } else {
+                setShowScrollTopButton(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // 상단으로 스크롤하는 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // 페이지네이션 범위 계산
-    const totalPages = searchResults?.totalPages || 1;
-    const startPage = Math.max(1, currentPage - 2); // 현재 페이지를 기준으로 앞뒤로 2개씩 표시
-    const endPage = Math.min(totalPages, startPage + 4); // 최대 5개 페이지 표시
-
-    const pageNumbers = [];
-    for (let i = startPage; i <= endPage; i++) {
-        pageNumbers.push(i);
-    }
-
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading && currentPage === 1) return <div className='spinner-container'>
+        <PacmanLoader color="#E4CCFD" />
+    </div>;
     if (isError) return <p>Something went wrong. Please try again.</p>;
 
     return (
@@ -129,6 +172,7 @@ const SearchResultsPage = () => {
             <div className="search-page-container">
                 <aside className={`filter-section ${isFilterOpen ? 'open' : ''}`}>
                     <div className="filter-header" onClick={toggleFilter}>
+                        <h5 className="filter-title"></h5>
                         <img
                             src="https://tickets.interpark.com/contents/images/icon/search-filter.svg"
                             alt="Filter Icon"
@@ -144,9 +188,7 @@ const SearchResultsPage = () => {
                                         <button
                                             key={genre.value}
                                             onClick={() => handleGenreChange(genre.value)}
-                                            className={
-                                                selectedGenre === genre.value ? 'active' : ''
-                                            }
+                                            className={selectedGenre === genre.value ? 'active' : ''}
                                         >
                                             {genre.label}
                                         </button>
@@ -161,9 +203,7 @@ const SearchResultsPage = () => {
                                         <button
                                             key={status.value}
                                             onClick={() => handleSaleStatusChange(status.value)}
-                                            className={
-                                                selectedSaleStatus === status.value ? 'active' : ''
-                                            }
+                                            className={selectedSaleStatus === status.value ? 'active' : ''}
                                         >
                                             {status.label}
                                         </button>
@@ -178,9 +218,7 @@ const SearchResultsPage = () => {
                                         <button
                                             key={region.value}
                                             onClick={() => handleRegionChange(region.value)}
-                                            className={
-                                                selectedRegion === region.value ? 'active' : ''
-                                            }
+                                            className={selectedRegion === region.value ? 'active' : ''}
                                         >
                                             {region.label}
                                         </button>
@@ -197,8 +235,8 @@ const SearchResultsPage = () => {
 
                 <section className="results-section">
                     <div className="item-card-list">
-                        {searchResults && searchResults.items && searchResults.items.length > 0 ? (
-                            searchResults.items.map((item, index) => {
+                        {items.length > 0 ? (
+                            items.map((item, index) => {
                                 const imageUrl =
                                     item.poster && item.poster.startsWith('/upload')
                                         ? `http://www.kopis.or.kr${item.poster}`
@@ -209,72 +247,55 @@ const SearchResultsPage = () => {
                                     poster: imageUrl,
                                 };
 
-                                return (
-                                    <div className="search-item-card-wrapper" key={index}>
-                                        <ItemCard item={modifiedItem} className="search-item-card" />
-                                        <div className="search-item-info">
-                                            <div className="search-item-title">
-                                                {item.prfnm || '제목 없음'}
-                                            </div>
-                                            <div className="search-item-details">
-                                                <div>{item.fcltynm || '공연 장소 정보 없음'}</div>
-                                                <span>
-                                                    {item.prfpdfrom === item.prfpdto
-                                                        ? item.prfpdfrom
-                                                        : `${item.prfpdfrom} - ${item.prfpdto}`}
-                                                </span>
+                                if (index === items.length - 1) {
+                                    return (
+                                        <div className="search-item-card-wrapper" key={index} ref={lastItemRef}>
+                                            <ItemCard item={modifiedItem} className="search-item-card" />
+                                            <div className="search-item-info">
+                                                <div className="search-item-title">{item.prfnm || '제목 없음'}</div>
+                                                <div className="search-item-details">
+                                                    <div>{item.fcltynm || '공연 장소 정보 없음'}</div>
+                                                    <span>
+                                                        {item.prfpdfrom === item.prfpdto
+                                                            ? item.prfpdfrom
+                                                            : `${item.prfpdfrom} - ${item.prfpdto}`}
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                );
+                                    );
+                                } else {
+                                    return (
+                                        <div className="search-item-card-wrapper" key={index}>
+                                            <ItemCard item={modifiedItem} className="search-item-card" />
+                                            <div className="search-item-info">
+                                                <div className="search-item-title">{item.prfnm || '제목 없음'}</div>
+                                                <div className="search-item-details">
+                                                    <div>{item.fcltynm || '공연 장소 정보 없음'}</div>
+                                                    <span>
+                                                        {item.prfpdfrom === item.prfpdto
+                                                            ? item.prfpdfrom
+                                                            : `${item.prfpdfrom} - ${item.prfpdto}`}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                }
                             })
                         ) : (
                             <p>검색 결과가 없습니다.</p>
                         )}
                     </div>
-
-                    {/* 페이지네이션 */}
-                    {searchResults && (
-                        <div className="pagination">
-                            <button
-                                onClick={() => handlePageChange(1)}
-                                disabled={currentPage === 1}
-                            >
-                                첫 페이지
-                            </button>
-                            <button
-                                onClick={() => handlePageChange(currentPage - 1)}
-                                disabled={currentPage === 1}
-                            >
-                                이전
-                            </button>
-                            {pageNumbers.map((page) => (
-                                <button
-                                    key={page}
-                                    onClick={() => handlePageChange(page)}
-                                    className={currentPage === page ? 'active' : ''}
-                                >
-                                    {page}
-                                </button>
-                            ))}
-                            <button
-                                onClick={() => handlePageChange(currentPage + 1)}
-                                disabled={currentPage === totalPages}
-                            >
-                                다음
-                            </button>
-                            <button
-                                onClick={() => handlePageChange(totalPages)}
-                                disabled={currentPage === totalPages}
-                            >
-                                마지막 페이지
-                            </button>
-                        </div>
-                    )}
                 </section>
+
+                {showScrollTopButton && (
+                    <button className="scroll-to-top-button" onClick={scrollToTop}>
+                        ▲
+                    </button>
+                )}
             </div>
         </Container>
-
     );
 };
 
