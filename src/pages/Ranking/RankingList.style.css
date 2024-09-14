@@ -188,13 +188,13 @@
         padding: 0;
         flex: 1;
         margin-left: auto;
-        margin-right: 20px;
+        margin-right: 15px;
         justify-content: center;
         height: 100%;
         white-space: normal;
         white-space: normal;
         word-break: break-word;
-        width: 400px;
+        width: 280px;
     }
 
     .ranking-list-number {
@@ -231,6 +231,6 @@
 
 @media (max-width: 480px) {
     .ranking-list-info {
-        max-width: 200px;
+        max-width: 180px;
     }
 }

@@ -3,19 +3,23 @@ import './Navbar.style.css';
 import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
+
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const genres = ['연극', '뮤지컬', '콘서트', '서양/한국무용', '대중무용', '클래식', '국악', '서커스/마술','복합예술공연'];
+  const genres = ['연극', '뮤지컬', '콘서트', '서양/한국무용', '대중무용', '클래식', '국악', '서커스/마술', '복합예술공연'];
   const genres_eng = ['play', 'musical', 'concert', 'dance', 'publicdance', 'classic', 'gugak', 'circusmagic', 'composite'];
 
   const navigate = useNavigate();
 
-  const handleSearch = e => {
+  const handleSearch = (e) => {
     e.preventDefault();
-    // 검색 기능 로직 추가 가능
-    console.log('검색어1:', searchTerm);
-    navigate(`${searchTerm}`);
+    if (searchTerm.trim()) {
+      navigate(`/search?query=${searchTerm}`);
+    } else {
+      navigate(`/search?query=`);
+    }
   };
+
   return (
     <Container>
       <div className='nav-top'>
@@ -33,7 +37,7 @@ const Navbar = () => {
                 type='text'
                 placeholder='검색어를 입력하세요'
                 value={searchTerm}
-                onChange={event => setSearchTerm(event.target.value)}
+                onChange={(event) => setSearchTerm(event.target.value)}
               />
               <img
                 width='50px'
@@ -65,6 +69,10 @@ const Navbar = () => {
           지역별
         </a>
       </div>
+
+
+
+
     </Container>
   );
 };
