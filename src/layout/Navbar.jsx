@@ -13,8 +13,10 @@ const Navbar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchTerm) {
-      navigate(`/search?query=${searchTerm}`); // 검색 페이지로 이동
+    if (searchTerm.trim()) {
+      navigate(`/search?query=${searchTerm}`);
+    } else {
+      navigate(`/search?query=`);
     }
   };
 

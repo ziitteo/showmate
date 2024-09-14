@@ -14,7 +14,14 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+}
+
+.filter-title {
+    margin-top: 10px;
+    margin-bottom: 0.5rem;
+    font-weight: bolder;
+    line-height: 1.2;
+    color: #333;
 }
 
 .filter-group h4 {
@@ -47,23 +54,20 @@
 }
 
 .filter-options button.active {
-    background-color: #6200ea;
+    background-color: #F7b5ca;
     color: #fff;
-}
-
-b .reset-button,
-.search-button {
-    padding: 8px 12px;
-    font-size: 12px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
+    border-color: #F7b5ca;
 }
 
 .reset-button {
+    padding: 8px 12px;
     background-color: #fff;
     border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
     color: #555;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .reset-button:hover {
@@ -71,26 +75,10 @@ b .reset-button,
     border-color: #ccc;
 }
 
-.search-button {
-    background-color: #6200ea;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    background-color: #4a00d1;
-}
-
 .results-section {
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-
-.results-section h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .item-card-list {
@@ -171,17 +159,6 @@ b .reset-button,
     margin-bottom: 10px;
 }
 
-.search-page-container .search-item-card-wrapper .card-info {
-    padding: 0;
-}
-
-.search-page-container .search-item-card-wrapper .card-info h2 {
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    padding-bottom: 30px;
-}
-
 .search-item-details {
     display: flex;
     flex-direction: column;
@@ -189,11 +166,6 @@ b .reset-button,
     color: #555;
     margin-top: 5px;
     gap: 2px;
-}
-
-.search-page-container .card-info p,
-.search-page-container .card-info h2 {
-    display: none;
 }
 
 .pagination {
@@ -216,9 +188,9 @@ b .reset-button,
 }
 
 .pagination button.active {
-    background-color: #6200ea;
+    background-color: #F7b5ca;
     color: #fff;
-    border-color: #6200ea;
+    border-color: #F7b5ca;
 }
 
 .pagination button:hover {
@@ -229,4 +201,8 @@ b .reset-button,
 .pagination button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+}
+
+.search-page-container .card-info {
+    display: none;
 }

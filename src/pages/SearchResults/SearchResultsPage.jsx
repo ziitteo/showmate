@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // useNavigate 추가
+import { useLocation, useNavigate } from 'react-router-dom';
 import useSearchQuery from '../../hooks/useSearch';
 import ItemCard from '../../common/components/ItemCard/ItemCard';
 import './SearchResultsPage.style.css';
@@ -47,7 +47,7 @@ const regions = [
 
 const SearchResultsPage = () => {
     const location = useLocation();
-    const navigate = useNavigate(); // useNavigate 사용
+    const navigate = useNavigate();
     const searchTerm = new URLSearchParams(location.search).get('query') || '';
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedGenre, setSelectedGenre] = useState('');
@@ -89,12 +89,10 @@ const SearchResultsPage = () => {
     };
 
     const handleSearch = () => {
-        // 검색 버튼 클릭 시 현재 선택된 필터로 검색하도록 navigate를 사용하여 URL을 갱신합니다.
         navigate(`?query=${searchTerm}&genre=${selectedGenre}&status=${selectedSaleStatus}&region=${selectedRegion}`);
     };
 
-    // 페이지네이션 범위 계산
-    const totalPageCount = 20; // 총 페이지 수 예시로 설정, 실제 데이터에 맞게 설정 필요
+    const totalPageCount = 20;
     const pagesPerGroup = 5;
     const currentGroup = Math.ceil(currentPage / pagesPerGroup);
     const startPage = (currentGroup - 1) * pagesPerGroup + 1;
@@ -106,7 +104,8 @@ const SearchResultsPage = () => {
     return (
         <div className="search-page-container">
             <aside className="filter-section">
-                <h5>필터</h5>
+                <h5 className="filter-title">필터</h5>
+                <hr />
                 <div className="filter-group">
                     <h4>장르</h4>
                     <div className="filter-options">
@@ -121,6 +120,8 @@ const SearchResultsPage = () => {
                         ))}
                     </div>
                 </div>
+                <hr />
+
                 <div className="filter-group">
                     <h4>공연상태</h4>
                     <div className="filter-options">
@@ -135,6 +136,8 @@ const SearchResultsPage = () => {
                         ))}
                     </div>
                 </div>
+                <hr />
+
                 <div className="filter-group">
                     <h4>지역</h4>
                     <div className="filter-options">
@@ -149,8 +152,8 @@ const SearchResultsPage = () => {
                         ))}
                     </div>
                 </div>
+                <hr />
                 <button className="reset-button" onClick={handleReset}>초기화</button>
-                {/* <button className="search-button" onClick={handleSearch}>검색</button> */}
             </aside>
 
             <section className="results-section">
@@ -185,7 +188,7 @@ const SearchResultsPage = () => {
                             );
                         })
                     ) : (
-                        <p>No results found.</p>
+                        <p>검색 결과가 없습니다.</p>
                     )}
                 </div>
 
