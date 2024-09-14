@@ -12,7 +12,7 @@ const MySelectPage = () => {
 
   const handleRemoveItem = (itemId) => {
     setWishItems((prevItems) =>
-      prevItems.filter((item) => item.mt20id !== itemId)
+      prevItems.filter((item) => item.mt20id !== itemId.mt20id)
     );
   };
 
