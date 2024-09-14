@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import useGenreQuery from '../../hooks/useGenre';
 import BannerCarousel from '../../common/components/BannerCarousel/BannerCarousel';
 import ItemCarousel from '../../common/components/ItemCarousel/ItemCarousel';
@@ -27,13 +27,13 @@ const MusicalPage = () => {
   }
 
   return (
-    <div className='section'>
+    <Container>
       <BannerCarousel data={playingData} />
       <h1 className='item-title'>공연 예정</h1>
       <ItemCarousel data={expectedData} />
       <h1 className='item-title'>뮤지컬 둘러보기</h1>
       <AllItem data={data} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />
-    </div>
+    </Container>
   );
 };
 

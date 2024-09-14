@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "./Login.style.css";
-import Logo from "./Logo.png";
+import Logo from "./text-wide-2.jpeg";
 
 const Login = ({ setAuthenticate }) => {
   const navigate = useNavigate();

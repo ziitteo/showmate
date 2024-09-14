@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Navbar.style.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
 const Navbar = ({ authenticate, setAuthenticate }) => {
