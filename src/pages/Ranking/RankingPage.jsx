@@ -4,6 +4,7 @@ import GenreRankingTab from './GenreRankingTab';
 import RankingList from './RankingList';
 import useRankingData from '../../hooks/useGenreRanking';
 import './RankingPage.style.css';
+import { PacmanLoader } from 'react-spinners';
 
 const getGenreCode = (genre) => {
   switch (genre) {
@@ -71,7 +72,9 @@ const RankingPage = () => {
         </button>
       </div>
       {isLoading ? (
-        <div>로딩 중...</div>
+        <div className='spinner-container'>
+          <PacmanLoader color="#E4CCFD" />
+        </div>
       ) : rankings.length ? (
         <RankingList rankings={rankings} />
       ) : (
