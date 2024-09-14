@@ -28,6 +28,13 @@ const Navbar = () => {
             alt='logo'
           />
         </a>
+        <a className='nav-logo-mobile' href='/'>
+          <img
+            width='200px'
+            src={'/icon-logo.png'}
+            alt='logo'
+          />
+        </a>
         <form onSubmit={handleSearch} className='nav-input'>
           <div className='nav-input-box'>
             <input

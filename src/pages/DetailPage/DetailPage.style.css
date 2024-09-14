@@ -58,3 +58,14 @@
     width: 20rem;
   }
 }
+
+@media (max-width: 500px) {
+  .detail-right {
+    margin-left: 0;
+    width: 350px;
+  }
+  .detail-all h2 {
+    width: 350px;
+  }
+
+}
