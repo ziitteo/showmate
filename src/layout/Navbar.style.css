@@ -1,16 +1,24 @@
 .nav-top {
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   align-items: center;
+  margin-top: 20px;
 }
-.nav-logo-search-area {
+
+.nav-input {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+
+  width: 100%;
+  max-width: 600px;
+  
 }
 .nav-input-box {
-  width: 450px;
+  width: 100%;
+  max-width: 600px;
   height: 50px;
-  /* max-width: 450px; */
   box-shadow: 0 2px 15px rgba(0, 0, 0, .129);
   border: 1px solid lightgray;
   border-radius: 50px;
@@ -22,14 +30,34 @@
 
 }
 .nav-input-box input {
+  width: 100%;
   outline: none;
   border: none;
   display: flex;
 }
-.nav-logo ,.nav-search-icon {
+.nav-logo, .nav-search-icon, .nav-top-items > span, .nav-bottom span {
   cursor: pointer;
 }
-.nav-top-items a ,.nav-bottom a {
+.nav-logo-mobile {
+  display: none;
+}
+.nav-top-items > span:hover {
+  color: lightgray;
+}
+.nav-bottom > span:hover {
+  border-bottom: 2px solid #000;
+}
+.nav-bottom .main-color:hover {
+  border-bottom: 2px solid #F7B5CA;
+}
+.nav-top-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+.nav-top-items a ,.nav-bottom span {
   color: black;
   text-decoration: none;
   margin: 10px;
@@ -37,8 +65,9 @@
 .nav-bottom {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
-.nav-bottom a {
+.nav-bottom span {
   font-weight: bold;
 }
 .main-color {
@@ -49,4 +78,37 @@
 }
 .text-gray {
   color: lightgray !important;;
+}
+
+/* 반응형 : 1090 이하인 경우 */
+@media screen and (max-width: 1090px) {
+  .nav-top-items {
+    display: none;
+  }
+  .nav-input, .nav-input-box {
+    width: 100%;
+    max-width: 45rem;
+  }
+}
+@media screen and (max-width: 856px) {
+  .nav-bottom {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-top {
+    gap: 10px;
+  }
+  .nav-logo-mobile {
+    display: block;
+    cursor: pointer;
+  }
+  .nav-logo-mobile img {
+    width: 50px;
+  }
+  .nav-logo {
+    display: none;
+  }
+
 }

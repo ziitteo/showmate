@@ -1,6 +1,71 @@
+.detail-all {
+  width: 50rem; margin: 0 auto;
+  /* max-width: 1280px; */
+  /* width: 100%;
+  margin: 0 auto; */
+  padding: 30px;
+  box-sizing: border-box;
+  
+}
+.detail-poster {
+  max-width: 300px;
+}
+.detail-right {
+  margin-left: 2rem;
+}
 .detail-right-item {
   display: flex;
 }
 .detail-right-item strong {
   width: 100px;
+}
+
+.item-hidden {
+  display: none;
+}
+
+.detail-buttons button {
+  background-color: transparent; 
+  padding: 10px 20px; 
+  cursor: pointer; 
+  transition: background-color 0.2s, color 0.2s; 
+  border-radius: 10px;
+  font-weight: 700;
+  background-color: #F7B5CA; 
+  color: #fff; 
+  height: 40px;
+  width: 25rem;
+  text-align: center;
+}
+
+.detail-buttons button:hover {
+  border: 2px solid #F7B5CA; 
+  color: #F7B5CA; 
+  background-color: white;
+}
+
+.detail-buttons button.selected {
+  background-color: #F7B5CA; 
+  color: #fff; 
+}
+
+/* 반응형 : 997 이하인 경우 */
+@media screen and (max-width: 997px) {
+  .container {
+    max-width: none;
+  }
+  .detail-buttons button {
+    width: 20rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .detail-right {
+    margin-left: 0;
+    width: 350px;
+  }
+  .detail-all h2 {
+    width: 350px;
+  }
+
 }

@@ -20,6 +20,7 @@ import ClassicPage from "./pages/Classic/ClassicPage";
 import Login from "./pages/Login/Login";
 import { GlobalProvider } from "./pages/DetailPage/GlobalContext";
 import PrivateRoute from "./pages/Login/PrivateRoute";
+import SearchResultsPage from "./pages/SearchResults/SearchResultsPage"; // 새로 추가된 검색 결과 페이지
 // 홈페이지
 // 뮤지컬 전체 페이지 /musicals
 // 연극 전체 페이지 /theaters
@@ -49,7 +50,8 @@ function App() {
               setAuthenticate={setAuthenticate}
             />
           }
-        >
+        />
+        <Route path="/" element={<AppLayout />}>
           <Route index element={<Homepage />} />
           <Route
             path="/login"
@@ -159,6 +161,20 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/play" element={<PlayPage />} />
+          <Route path="/musical" element={<MusicalPage />} />
+          <Route path="/concert" element={<ConcertPage />} />
+          <Route path="/dance" element={<DancePage />} />
+          <Route path="/publicdance" element={<PublicDancePage />} />
+          <Route path="/classic" element={<ClassicPage />} />
+          <Route path="/gugak" element={<GugakPage />} />
+          <Route path="/circusmagic" element={<CircusMagicPage />} />
+          <Route path="/composite" element={<CompositePage />} />
+          <Route path="/goods/:id" element={<DetailPage />} />
+          <Route path="/region" element={<RegionPage />} />
+          <Route path="/ranking" element={<RankingPage />} />
+          <Route path="/my-select" element={<MySelectPage />} />
+          <Route path="/search" element={<SearchResultsPage />} />
         </Route>
       </Routes>
     </GlobalProvider>
