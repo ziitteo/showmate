@@ -208,7 +208,7 @@
     opacity: 0.5;
 }
 
-.card-info {
+.search-item-card-wrapper .card-info {
     display: none;
 }
 
