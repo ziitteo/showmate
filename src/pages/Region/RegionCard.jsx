@@ -107,17 +107,15 @@ const RegionCard = () => {
               ...performance,
               poster: imageUrl,
             };
-            console.log('item', item)
-            const title = Array.isArray(performance.title)
-              ? performance.title.join('')
-              : performance.title || '제목 없음';
-            const location = Array.isArray(performance.venue)
-              ? performance.venue.join('')
-              : performance.venue || '공연 장소 정보 없음';
-            const period = Array.isArray(performance.start)
-              ? performance.start.join('')
-              : performance.start || '공연 날짜 정보 없음';
-
+            const title = Array.isArray(item.title)
+              ? item.title.join('')
+              : item.title || '제목 없음';
+            const location = Array.isArray(item.venue)
+              ? item.venue.join('')
+              : item.venue || '공연 장소 정보 없음';
+            const period = Array.isArray(item.start)
+              ? item.start.join('')
+              : item.start || '공연 날짜 정보 없음';
             return (
               <div className="region-list-item-wrapper" key={index}>
                 <div
