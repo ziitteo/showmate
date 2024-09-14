@@ -15,13 +15,19 @@ const ItemCard = ({ item, onRemove }) => {
     e.stopPropagation();
     const savedItems = JSON.parse(localStorage.getItem("savedItems")) || [];
     if (isWish) {
+      // 찜 리스트에서 제거
       const updatedItems = savedItems.filter(
         (savedItem) => savedItem.mt20id !== item.mt20id
       );
       localStorage.setItem("savedItems", JSON.stringify(updatedItems));
       setIsWish(false);
-      onRemove(item.mt20id); // 카드 제거 시 콜백 호출
+
+      // onRemove 함수가 있을 때만 호출(찜 리스트 페이지에서만)
+      if (onRemove) {
+        onRemove(item);
+      }
     } else {
+      // 찜 리스트에 추가
       savedItems.push(item);
       localStorage.setItem("savedItems", JSON.stringify(savedItems));
       setIsWish(true);
