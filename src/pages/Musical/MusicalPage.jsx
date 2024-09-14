@@ -1,9 +1,10 @@
 import React from 'react';
-import { Alert, Spinner } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import useGenreQuery from '../../hooks/useGenre';
 import BannerCarousel from '../../common/components/BannerCarousel/BannerCarousel';
 import ItemCarousel from '../../common/components/ItemCarousel/ItemCarousel';
 import AllItem from '../../common/components/AllItem/AllItem';
+import { PacmanLoader } from 'react-spinners';
 
 const MusicalPage = () => {
   // 뮤지컬 전체 데이터 요청
@@ -16,7 +17,7 @@ const MusicalPage = () => {
   if (isLoading) {
     return (
       <div className='spinner-container'>
-        <Spinner animation='border' variant='warning' />
+        <PacmanLoader color="#E4CCFD" />
       </div>
     );
   }
