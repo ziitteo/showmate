@@ -49,8 +49,11 @@ const ItemCard = ({ item, onRemove }) => {
     >
       <div className="image-container">
         <img src={item.poster} alt={item.prfnm} className="card-image" />
-        <button className="favorite-button" onClick={toggleWish}>
-          {isWish ? "-" : "+"}
+        <button
+          className={`favorite-button ${isWish ? "active" : ""}`}
+          onClick={toggleWish}
+        >
+          {isWish ? "★" : "★"}
         </button>
       </div>
       <div className="card-info">
