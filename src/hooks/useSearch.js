@@ -9,29 +9,40 @@ const useSearchQuery = (
   regionCode = "",
   params = {}
 ) => {
-  // 검색어가 공란일 때 전체 데이터를 가져오도록 기본 파라미터 설정
+  // 기본 파라미터 설정
   const defaultParams = {
-    rows: 12, // 한 번에 가져올 데이터 수 (페이지당 아이템 수)
-    ...(searchTerm ? { shprfnm: searchTerm } : {}), // 공연 이름에 검색어 포함, 검색어가 없으면 전체 리스트
-    ...(genre ? { shcate: genre } : {}), // 장르가 선택되었을 경우 필터링 추가
-    ...(saleStatus ? { prfstate: saleStatus } : {}), // 판매 상태가 선택되었을 경우 필터링 추가
-    ...(regionCode ? { signgucode: regionCode } : {}), // 지역 코드가 선택되었을 경우 필터링 추가
-    cpage: page, // 현재 페이지 번호
+    rows: 24, // 한 페이지당 아이템 수
+    ...(searchTerm.trim() !== "" ? { shprfnm: searchTerm } : {}),
+    ...(genre ? { shcate: genre } : {}),
+    ...(saleStatus ? { prfstate: saleStatus } : {}),
+    ...(regionCode ? { signgucode: regionCode } : {}),
+    cpage: page,
     ...params,
   };
 
-  // useQuery로 검색 데이터를 가져오는 로직 구현
-  return useQuery({
-    queryKey: ["search", defaultParams], // 쿼리 키 설정
+  console.log("Request Parameters:", defaultParams); // 파라미터 확인용 로그
 
-    // API 요청 함수 정의
+  // API 요청 함수 정의
+  return useQuery({
+    queryKey: ["search", defaultParams],
     queryFn: async () => {
       const result = await fetchData("/pblprfr", defaultParams);
+      console.log("API Response:", result); // 전체 응답 데이터 확인
       return result;
     },
+    select: (data) => {
+      console.log("Response Data:", data.dbs); // 응답 구조 확인
+      const items = data.dbs?.db || [];
 
-    // 필요한 데이터 선택
-    select: (data) => data.dbs?.db || [],
+      // 아이템의 개수를 이용해 totalCount 계산
+      const totalCount = items.length; // 응답에서 개수를 직접 계산
+
+      return {
+        items,
+        totalCount,
+        totalPages: Math.ceil(totalCount / defaultParams.rows),
+      };
+    },
   });
 };
 
