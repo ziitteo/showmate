@@ -1,8 +1,9 @@
 import React from 'react';
-import { Alert, Spinner } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import usePerformanceQuery from '../../hooks/usePerformances';
 import BannerCarousel from '../../common/components/BannerCarousel/BannerCarousel';
 import GenreRanking from './components/GenreRanking/GenreRanking';
+import { PacmanLoader } from 'react-spinners';
 
 const Homepage = () => {
   const { data, isLoading, isError, error } = usePerformanceQuery();
@@ -10,7 +11,7 @@ const Homepage = () => {
   if (isLoading) {
     return (
       <div className='spinner-container'>
-        <Spinner animation='border' variant='warning' />
+        <PacmanLoader color="#E4CCFD" />
       </div>
     );
   }
@@ -20,10 +21,10 @@ const Homepage = () => {
   }
 
   return (
-    <div className='section'>
+    <Container>
       <BannerCarousel data={data} />
       <GenreRanking />
-    </div>
+    </Container>
   );
 };
 

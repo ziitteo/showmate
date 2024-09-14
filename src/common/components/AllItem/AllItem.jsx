@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Spinner } from 'react-bootstrap';
 import ItemCard from '../ItemCard/ItemCard';
 import './AllItem.style.css';
+import { PacmanLoader } from 'react-spinners';
 
 // data: API에서 받아온 데이터
 // fetchNextPage: 다음 페이지 데이터를 가져오는 함수
@@ -103,7 +103,7 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
         )}
         {/* 무한 스크롤 감지 요소 */}
         <div ref={observerRef} className='loading-indicator'>
-          {hasNextPage ? <Spinner animation='border' variant='warning' /> : ''}
+          {hasNextPage ? <PacmanLoader color='#E4CCFD' /> : ''}
         </div>
       </div>
     </div>

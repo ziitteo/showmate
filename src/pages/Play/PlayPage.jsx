@@ -1,9 +1,10 @@
 import React from 'react';
-import { Alert, Spinner } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import useGenreQuery from '../../hooks/useGenre';
 import BannerCarousel from '../../common/components/BannerCarousel/BannerCarousel';
 import ItemCarousel from '../../common/components/ItemCarousel/ItemCarousel';
 import AllItem from '../../common/components/AllItem/AllItem';
+import { PacmanLoader } from 'react-spinners';
 
 const PlayPage = () => {
   // 연극 전체 데이터 요청
@@ -16,7 +17,7 @@ const PlayPage = () => {
   if (isLoading) {
     return (
       <div className='spinner-container'>
-        <Spinner animation='border' variant='warning' />
+        <PacmanLoader color="#E4CCFD" />
       </div>
     );
   }
@@ -26,13 +27,13 @@ const PlayPage = () => {
   }
 
   return (
-    <div className='section'>
+    <Container>
       <BannerCarousel data={playingData} />
       <h1 className='item-title'>공연 예정</h1>
       <ItemCarousel data={expectedData} />
       <h1 className='item-title'>연극 둘러보기</h1>
       <AllItem data={data} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} />
-    </div>
+    </Container>
   );
 };
 

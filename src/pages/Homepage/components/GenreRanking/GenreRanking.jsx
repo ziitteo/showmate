@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Alert, Spinner } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import useRankingQuery from '../../../../hooks/useRanking';
 import RankingCarousel from '../RankingCarousel/RankingCarousel';
 import './GenreRanking.style.css';
+import { PacmanLoader } from 'react-spinners';
 
 const GenreRanking = () => {
   const menuList = [
@@ -36,8 +37,8 @@ const GenreRanking = () => {
 
   if (isLoading) {
     return (
-      <div className='ranking-spinner-container'>
-        <Spinner animation='border' variant='warning' />
+      <div className='spinner-container'>
+        <PacmanLoader color="#E4CCFD" />
       </div>
     );
   }

@@ -44,7 +44,7 @@ const RankingList = ({ rankings }) => {
                             <div className="ranking-list-info">
                                 <div className="ranking-list-item-title">{title}</div>
                                 <div className="ranking-list-details">
-                                    <span>{location}</span>
+                                    <div>{location}</div>
                                     <span>{period}</span>
                                 </div>
                             </div>
