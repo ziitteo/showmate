@@ -8,7 +8,8 @@ import { useEffect } from "react";
 // var detailInfoData = [];
 const useDetailInfoQuery = async(id) => {
   // console.log('useDetailInfoQuery id', id)
-  const request = await axios.get(`/pblprfr/${id}`)
+  // const request = await axios.get(`/pblprfr/${id}`)
+  const request = await axios.get(`/api/pblprfr/${id}`)
   // console.log(axios.get(`/pblprfr/${id}`))
   console.log('request',request)
   console.log('request.data',request.data)
