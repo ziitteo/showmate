@@ -2,18 +2,36 @@
     display: flex;
     padding: 20px;
     gap: 20px;
-    max-width: 1400px;
+    max-width: 100%;
     margin: 0 auto;
+    overflow-x: hidden;
+}
+
+.image-container {
+    aspect-ratio: auto;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .filter-section {
-    width: 250px;
+    width: 220px;
+    min-width: 220px;
     padding: 15px;
     background: #f8f8f8;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+}
+
+.results-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
 }
 
 .filter-title {
@@ -37,28 +55,7 @@
     gap: 5px;
 }
 
-.filter-options button {
-    padding: 8px 12px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 12px;
-    color: #555;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.filter-options button:hover {
-    background-color: #f0f0f0;
-    border-color: #ccc;
-}
-
-.filter-options button.active {
-    background-color: #F7b5ca;
-    color: #fff;
-    border-color: #F7b5ca;
-}
-
+.filter-options button,
 .reset-button {
     padding: 8px 12px;
     background-color: #fff;
@@ -70,15 +67,16 @@
     transition: all 0.2s ease;
 }
 
+.filter-options button:hover,
 .reset-button:hover {
     background-color: #f0f0f0;
     border-color: #ccc;
 }
 
-.results-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+.filter-options button.active {
+    background-color: #F7b5ca;
+    color: #fff;
+    border-color: #F7b5ca;
 }
 
 .item-card-list {
@@ -86,14 +84,14 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     justify-items: center;
+    width: 100%;
 }
 
 .search-item-card-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 240px;
-    min-height: 100%;
+    width: 100%;
     text-align: center;
     background: #fff;
     border: 1px solid #ddd;
@@ -108,8 +106,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 180px;
-    min-height: 380px;
+    width: 240px;
     margin: 0 5px;
     background: #fff;
     border: 1px solid #ddd;
@@ -118,18 +115,18 @@
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.search-item-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.item-card-list .card-image {
-    width: 240px;
-    height: 300px;
-    object-fit: cover;
+.search-item-card .card-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
     object-position: center;
     border-radius: 10px 10px 0 0;
     transition: opacity 0.3s ease;
+}
+
+.search-item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .search-item-title {
@@ -203,6 +200,72 @@
     opacity: 0.5;
 }
 
-.search-page-container .card-info {
+.card-info {
     display: none;
+}
+
+@media (max-width: 1024px) {
+    .image-container {
+        aspect-ratio: auto;
+        width: 120px;
+        height: 170px;
+        margin-top: 0;
+        margin-left: 0;
+        border-radius: 10px;
+        object-fit: cover;
+        object-position: center;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .search-page-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-section {
+        order: -1;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .item-card-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-item-card {
+        width: 120px;
+        height: 170px;
+        flex-shrink: 0;
+        margin-right: 10px;
+        border-radius: 10px;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .search-item-info {
+        align-items: flex-start;
+        text-align: left;
+        margin-right: 15px;
+    }
+
+    .search-item-title {
+        margin-bottom: 5px;
+    }
+
+    .search-item-details {
+        font-size: 12px;
+    }
+
+    .search-item-details span {
+        margin-top: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-item-info {
+        max-width: 180px;
+    }
 }
