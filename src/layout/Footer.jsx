@@ -21,11 +21,29 @@ const Footer = () => {
             </a>
           ))}
         </Container>
+        <Container className="footer-top-menu-list-mobile">
+        {footerItems.map((item, idx) => {
+          if (idx < 2 || idx > 12 || idx === 7) return null; // idx가 2 미만, 12 초과, 또는 7일 때 제외
+          return (
+            <React.Fragment key={idx}>
+              {idx === 8 && <br />} {/* idx가 8일 때 br 태그 추가 해서 줄바꿈 */}
+              <a 
+                href='#!' 
+                className={`${idx % 2 !== 0 ? 'text-gray' : ''}`}
+              >
+                {item}
+              </a>
+            </React.Fragment>
+          );
+        })}
+
+
+        </Container>
       </div>
 
       {/* 하단 정보 */}
       <Container className="footer-main">
-        <div className="footer-section">
+        <div className="footer-section1">
           <h4>(주)쇼메이트</h4>
           <p>
             주소: 서울 서초구 강남대로 447<br />
@@ -34,16 +52,16 @@ const Footer = () => {
             대표이사: 김빛나
           </p>
         </div>
-        <div className="footer-section">
+        <div className="footer-section2">
           <h4>고객센터</h4>
           <p>
             티켓: 1544-1555 | 팩스: 02-830-7807<br />
-            이메일: helpdesk@interpark.com<br />
+            이메일: helpdesk@showmate.com<br />
             해외: 02-3479-4399<br />
             국번없이 1544-1555
           </p>
         </div>
-        <div className="footer-section">
+        <div className="footer-section3">
           <h4>전자금융거래 분쟁처리 담당</h4>
           <p>
             티켓: 1544-1555 | 팩스: 02-830-8295<br />
