@@ -1,0 +1,21 @@
+.my-select-page {
+  padding: 20px;
+}
+
+.my-select-page-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.favorite-items-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.empty-container {
+  text-align: center;
+  font-size: 18px;
+  color: #999;
+}
