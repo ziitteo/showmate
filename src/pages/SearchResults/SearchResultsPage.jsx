@@ -14,14 +14,14 @@ const genres = [
     { label: '클래식', value: 'CCCA' },
     { label: '국악', value: 'CCCC' },
     { label: '서커스/마술', value: 'EEEB' },
-    { label: '복합예술공연', value: 'EEEA' }
+    { label: '복합예술공연', value: 'EEEA' },
 ];
 
 const saleStatuses = [
     { label: '전체', value: '' },
     { label: '공연중', value: '02' },
     { label: '공연예정', value: '01' },
-    { label: '공연종료', value: '03' }
+    { label: '공연종료', value: '03' },
 ];
 
 const regions = [
@@ -42,7 +42,7 @@ const regions = [
     { label: '전라남도', value: '46' },
     { label: '경상북도', value: '47' },
     { label: '경상남도', value: '48' },
-    { label: '제주특별자치도', value: '50' }
+    { label: '제주특별자치도', value: '50' },
 ];
 
 const SearchResultsPage = () => {
@@ -53,7 +53,8 @@ const SearchResultsPage = () => {
     const [selectedSaleStatus, setSelectedSaleStatus] = useState('');
     const [selectedRegion, setSelectedRegion] = useState('');
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
+    const [currentPage, setCurrentPage] = useState(1);
+
     const { data: searchResults, isLoading, isError } = useSearchQuery(
         searchTerm,
         currentPage,
@@ -99,13 +100,25 @@ const SearchResultsPage = () => {
     }, []);
 
     const handleSearch = () => {
-        navigate(`?query=${searchTerm}&genre=${selectedGenre}&status=${selectedSaleStatus}&region=${selectedRegion}`);
+        navigate(
+            `?query=${searchTerm}&genre=${selectedGenre}&status=${selectedSaleStatus}&region=${selectedRegion}`
+        );
     };
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
         handleSearch();
     };
+
+    // 페이지네이션 범위 계산
+    const totalPages = searchResults?.totalPages || 1;
+    const startPage = Math.max(1, currentPage - 2); // 현재 페이지를 기준으로 앞뒤로 2개씩 표시
+    const endPage = Math.min(totalPages, startPage + 4); // 최대 5개 페이지 표시
+
+    const pageNumbers = [];
+    for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+    }
 
     if (isLoading) return <p>Loading...</p>;
     if (isError) return <p>Something went wrong. Please try again.</p>;
@@ -114,7 +127,7 @@ const SearchResultsPage = () => {
         <div className="search-page-container">
             <aside className={`filter-section ${isFilterOpen ? 'open' : ''}`}>
                 <div className="filter-header" onClick={toggleFilter}>
-                    <h5 className="filter-title"></h5>
+                    <h5 className="filter-title">필터</h5>
                     <img
                         src="https://tickets.interpark.com/contents/images/icon/search-filter.svg"
                         alt="Filter Icon"
@@ -130,7 +143,9 @@ const SearchResultsPage = () => {
                                     <button
                                         key={genre.value}
                                         onClick={() => handleGenreChange(genre.value)}
-                                        className={selectedGenre === genre.value ? 'active' : ''}
+                                        className={
+                                            selectedGenre === genre.value ? 'active' : ''
+                                        }
                                     >
                                         {genre.label}
                                     </button>
@@ -145,7 +160,9 @@ const SearchResultsPage = () => {
                                     <button
                                         key={status.value}
                                         onClick={() => handleSaleStatusChange(status.value)}
-                                        className={selectedSaleStatus === status.value ? 'active' : ''}
+                                        className={
+                                            selectedSaleStatus === status.value ? 'active' : ''
+                                        }
                                     >
                                         {status.label}
                                     </button>
@@ -160,7 +177,9 @@ const SearchResultsPage = () => {
                                     <button
                                         key={region.value}
                                         onClick={() => handleRegionChange(region.value)}
-                                        className={selectedRegion === region.value ? 'active' : ''}
+                                        className={
+                                            selectedRegion === region.value ? 'active' : ''
+                                        }
                                     >
                                         {region.label}
                                     </button>
@@ -168,7 +187,9 @@ const SearchResultsPage = () => {
                             </div>
                         </div>
                         <hr />
-                        <button className="reset-button" onClick={handleReset}>초기화</button>
+                        <button className="reset-button" onClick={handleReset}>
+                            초기화
+                        </button>
                     </div>
                 )}
             </aside>
@@ -191,7 +212,9 @@ const SearchResultsPage = () => {
                                 <div className="search-item-card-wrapper" key={index}>
                                     <ItemCard item={modifiedItem} className="search-item-card" />
                                     <div className="search-item-info">
-                                        <div className="search-item-title">{item.prfnm || '제목 없음'}</div>
+                                        <div className="search-item-title">
+                                            {item.prfnm || '제목 없음'}
+                                        </div>
                                         <div className="search-item-details">
                                             <div>{item.fcltynm || '공연 장소 정보 없음'}</div>
                                             <span>
@@ -209,29 +232,41 @@ const SearchResultsPage = () => {
                     )}
                 </div>
 
-                {/* 페이징네이션*/}
-                {searchResults && searchResults.totalPages > 1 && (
+                {/* 페이지네이션 */}
+                {searchResults && (
                     <div className="pagination">
+                        <button
+                            onClick={() => handlePageChange(1)}
+                            disabled={currentPage === 1}
+                        >
+                            첫 페이지
+                        </button>
                         <button
                             onClick={() => handlePageChange(currentPage - 1)}
                             disabled={currentPage === 1}
                         >
                             이전
                         </button>
-                        {Array.from({ length: searchResults.totalPages }, (_, index) => (
+                        {pageNumbers.map((page) => (
                             <button
-                                key={index}
-                                onClick={() => handlePageChange(index + 1)}
-                                className={currentPage === index + 1 ? 'active' : ''}
+                                key={page}
+                                onClick={() => handlePageChange(page)}
+                                className={currentPage === page ? 'active' : ''}
                             >
-                                {index + 1}
+                                {page}
                             </button>
                         ))}
                         <button
                             onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage === searchResults.totalPages}
+                            disabled={currentPage === totalPages}
                         >
                             다음
+                        </button>
+                        <button
+                            onClick={() => handlePageChange(totalPages)}
+                            disabled={currentPage === totalPages}
+                        >
+                            마지막 페이지
                         </button>
                     </div>
                 )}
