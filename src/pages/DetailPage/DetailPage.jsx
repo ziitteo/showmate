@@ -4,7 +4,9 @@ import axios from "../../utils/axios";
 import { parseXML } from "../../utils/util";
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { PacmanLoader } from 'react-spinners';
 import './DetailPage.style.css';
+
 const DetailPage = () => {
   const infoData = useGlobal();
   const {id} = useParams();
@@ -34,7 +36,11 @@ const DetailPage = () => {
 
   const { data } = infoData;
 
-  if (!data) return <h2>Loading...</h2>;
+  if (!data) return (
+    <div className='spinner-container'>
+      <PacmanLoader color="#E4CCFD" />
+    </div>
+  );
 
   return (
     <div className='detail-all'>
