@@ -73,6 +73,12 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
           </div>
         </form>
         <div className="nav-top-items">
+          <button 
+            className="nav-favorite-button"
+            onClick={() => handleGenreClick("my-select")}
+          >
+            ☆
+          </button>
           {authenticate ? (
             <a href="#" onClick={handleLogout}>
               로그아웃
