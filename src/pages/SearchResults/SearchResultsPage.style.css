@@ -10,14 +10,14 @@
 .search-item-card-wrapper .image-container {
     aspect-ratio: auto;
     width: 100%;
-    height: 300px;
+    height: 320px;
     object-fit: cover;
     object-position: center;
 }
 
 .filter-section {
-    width: 220px;
-    min-width: 220px;
+    width: 250px;
+    min-width: 250px;
     padding: 15px;
     background: #f8f8f8;
     border: 1px solid #e0e0e0;
@@ -106,7 +106,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 240px;
+    width: 100%;
     margin: 0 5px;
     background: #fff;
     border: 1px solid #ddd;
@@ -205,17 +205,22 @@
 }
 
 @media (max-width: 1024px) {
+    .search-item-card-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
     .search-item-card-wrapper .image-container {
-        aspect-ratio: auto;
-        width: 120px;
-        height: 170px;
-        margin-top: 0;
-        margin-left: 0;
+        width: 140px;
+        height: 200px;
         border-radius: 10px;
         object-fit: cover;
         object-position: center;
         display: flex;
         justify-content: flex-start;
+        margin: 10px;
     }
 
     .search-page-container {
@@ -253,6 +258,7 @@
 
     .search-item-title {
         margin-bottom: 5px;
+        padding: 0;
     }
 
     .search-item-details {
