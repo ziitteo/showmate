@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useSearchQuery from '../../hooks/useSearch';
 import ItemCard from '../../common/components/ItemCard/ItemCard';
 import './SearchResultsPage.style.css';
 import { Container } from 'react-bootstrap';
+import { PacmanLoader } from 'react-spinners';
 
 const genres = [
     { label: '전체', value: '' },
@@ -15,14 +16,14 @@ const genres = [
     { label: '클래식', value: 'CCCA' },
     { label: '국악', value: 'CCCC' },
     { label: '서커스/마술', value: 'EEEB' },
-    { label: '복합예술공연', value: 'EEEA' }
+    { label: '복합예술공연', value: 'EEEA' },
 ];
 
 const saleStatuses = [
     { label: '전체', value: '' },
     { label: '공연중', value: '02' },
     { label: '공연예정', value: '01' },
-    { label: '공연종료', value: '03' }
+    { label: '공연종료', value: '03' },
 ];
 
 const regions = [
@@ -43,7 +44,7 @@ const regions = [
     { label: '전라남도', value: '46' },
     { label: '경상북도', value: '47' },
     { label: '경상남도', value: '48' },
-    { label: '제주특별자치도', value: '50' }
+    { label: '제주특별자치도', value: '50' },
 ];
 
 const SearchResultsPage = () => {
@@ -54,7 +55,11 @@ const SearchResultsPage = () => {
     const [selectedSaleStatus, setSelectedSaleStatus] = useState('');
     const [selectedRegion, setSelectedRegion] = useState('');
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태 추가
+    const [currentPage, setCurrentPage] = useState(1);
+    const [items, setItems] = useState([]);
+    const [showScrollTopButton, setShowScrollTopButton] = useState(false); // 스크롤 버튼 상태
+    const observerRef = useRef(null);
+
     const { data: searchResults, isLoading, isError } = useSearchQuery(
         searchTerm,
         currentPage,
@@ -63,19 +68,50 @@ const SearchResultsPage = () => {
         selectedRegion
     );
 
+    // 검색어가 변경될 때마다 상태 초기화
+    useEffect(() => {
+        setItems([]); // 새로운 검색어에 맞게 아이템 초기화
+        setCurrentPage(1); // 첫 페이지로 초기화
+    }, [searchTerm]);
+
+    // 데이터 확인 및 items 배열 체크
+    useEffect(() => {
+        if (searchResults && Array.isArray(searchResults.items)) {
+            setItems((prevItems) => [...prevItems, ...searchResults.items]);
+        }
+    }, [searchResults]);
+
+    // 무한 스크롤 로직
+    const lastItemRef = useCallback(
+        (node) => {
+            if (isLoading) return;
+            if (observerRef.current) observerRef.current.disconnect();
+            observerRef.current = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setCurrentPage((prevPage) => prevPage + 1);
+                }
+            });
+            if (node) observerRef.current.observe(node);
+        },
+        [isLoading]
+    );
+
     const handleGenreChange = (genre) => {
         setSelectedGenre(genre);
         setCurrentPage(1);
+        setItems([]);
     };
 
     const handleSaleStatusChange = (status) => {
         setSelectedSaleStatus(status);
         setCurrentPage(1);
+        setItems([]);
     };
 
     const handleRegionChange = (region) => {
         setSelectedRegion(region);
         setCurrentPage(1);
+        setItems([]);
     };
 
     const handleReset = () => {
@@ -83,6 +119,7 @@ const SearchResultsPage = () => {
         setSelectedSaleStatus('');
         setSelectedRegion('');
         setCurrentPage(1);
+        setItems([]);
     };
 
     const toggleFilter = () => {
@@ -94,153 +131,182 @@ const SearchResultsPage = () => {
     };
 
     useEffect(() => {
-        if (window.innerWidth > 1024) {
-            setIsFilterOpen(true);
-        }
+        const handleResize = () => {
+            if (window.innerWidth > 1024) {
+                setIsFilterOpen(true);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     const handleSearch = () => {
-        navigate(`?query=${searchTerm}&genre=${selectedGenre}&status=${selectedSaleStatus}&region=${selectedRegion}`);
+        setItems([]);
+        setCurrentPage(1);
+        navigate(
+            `?query=${searchTerm}&genre=${selectedGenre}&status=${selectedSaleStatus}&region=${selectedRegion}`
+        );
     };
 
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-        handleSearch();
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowScrollTopButton(true);
+            } else {
+                setShowScrollTopButton(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // 상단으로 스크롤하는 함수
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading && currentPage === 1) return <div className='spinner-container'>
+        <PacmanLoader color="#E4CCFD" />
+    </div>;
     if (isError) return <p>Something went wrong. Please try again.</p>;
 
     return (
-      <Container>
-                <div className="search-page-container">
-            <aside className={`filter-section ${isFilterOpen ? 'open' : ''}`}>
-                <div className="filter-header" onClick={toggleFilter}>
-                    <h5 className="filter-title"></h5>
-                    <img
-                        src="https://tickets.interpark.com/contents/images/icon/search-filter.svg"
-                        alt="Filter Icon"
-                        className={`toggle-icon ${isFilterOpen ? 'open' : ''}`}
-                    />
-                </div>
-                {isFilterOpen && (
-                    <div className="filter-content">
-                        <div className="filter-group">
-                            <h4>장르</h4>
-                            <div className="filter-options">
-                                {genres.map((genre) => (
-                                    <button
-                                        key={genre.value}
-                                        onClick={() => handleGenreChange(genre.value)}
-                                        className={selectedGenre === genre.value ? 'active' : ''}
-                                    >
-                                        {genre.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        <hr />
-                        <div className="filter-group">
-                            <h4>공연상태</h4>
-                            <div className="filter-options">
-                                {saleStatuses.map((status) => (
-                                    <button
-                                        key={status.value}
-                                        onClick={() => handleSaleStatusChange(status.value)}
-                                        className={selectedSaleStatus === status.value ? 'active' : ''}
-                                    >
-                                        {status.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        <hr />
-                        <div className="filter-group">
-                            <h4>지역</h4>
-                            <div className="filter-options">
-                                {regions.map((region) => (
-                                    <button
-                                        key={region.value}
-                                        onClick={() => handleRegionChange(region.value)}
-                                        className={selectedRegion === region.value ? 'active' : ''}
-                                    >
-                                        {region.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        <hr />
-                        <button className="reset-button" onClick={handleReset}>초기화</button>
+        <Container>
+            <div className="search-page-container">
+                <aside className={`filter-section ${isFilterOpen ? 'open' : ''}`}>
+                    <div className="filter-header" onClick={toggleFilter}>
+                        <h5 className="filter-title"></h5>
+                        <img
+                            src="https://tickets.interpark.com/contents/images/icon/search-filter.svg"
+                            alt="Filter Icon"
+                            className={`toggle-icon ${isFilterOpen ? 'open' : ''}`}
+                        />
                     </div>
-                )}
-            </aside>
-
-            <section className="results-section">
-                <div className="item-card-list">
-                    {searchResults && searchResults.items && searchResults.items.length > 0 ? (
-                        searchResults.items.map((item, index) => {
-                            const imageUrl =
-                                item.poster && item.poster.startsWith('/upload')
-                                    ? `http://www.kopis.or.kr${item.poster}`
-                                    : item.poster || '이미지 없음';
-
-                            const modifiedItem = {
-                                ...item,
-                                poster: imageUrl,
-                            };
-
-                            return (
-                                <div className="search-item-card-wrapper" key={index}>
-                                    <ItemCard item={modifiedItem} className="search-item-card" />
-                                    <div className="search-item-info">
-                                        <div className="search-item-title">{item.prfnm || '제목 없음'}</div>
-                                        <div className="search-item-details">
-                                            <div>{item.fcltynm || '공연 장소 정보 없음'}</div>
-                                            <span>
-                                                {item.prfpdfrom === item.prfpdto
-                                                    ? item.prfpdfrom
-                                                    : `${item.prfpdfrom} - ${item.prfpdto}`}
-                                            </span>
-                                        </div>
-                                    </div>
+                    {isFilterOpen && (
+                        <div className="filter-content">
+                            <div className="filter-group">
+                                <h4>장르</h4>
+                                <div className="filter-options">
+                                    {genres.map((genre) => (
+                                        <button
+                                            key={genre.value}
+                                            onClick={() => handleGenreChange(genre.value)}
+                                            className={selectedGenre === genre.value ? 'active' : ''}
+                                        >
+                                            {genre.label}
+                                        </button>
+                                    ))}
                                 </div>
-                            );
-                        })
-                    ) : (
-                        <p>검색 결과가 없습니다.</p>
-                    )}
-                </div>
-
-                {/* 페이징네이션*/}
-                {searchResults && searchResults.totalPages > 1 && (
-                    <div className="pagination">
-                        <button
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                        >
-                            이전
-                        </button>
-                        {Array.from({ length: searchResults.totalPages }, (_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => handlePageChange(index + 1)}
-                                className={currentPage === index + 1 ? 'active' : ''}
-                            >
-                                {index + 1}
+                            </div>
+                            <hr />
+                            <div className="filter-group">
+                                <h4>공연상태</h4>
+                                <div className="filter-options">
+                                    {saleStatuses.map((status) => (
+                                        <button
+                                            key={status.value}
+                                            onClick={() => handleSaleStatusChange(status.value)}
+                                            className={selectedSaleStatus === status.value ? 'active' : ''}
+                                        >
+                                            {status.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            <hr />
+                            <div className="filter-group">
+                                <h4>지역</h4>
+                                <div className="filter-options">
+                                    {regions.map((region) => (
+                                        <button
+                                            key={region.value}
+                                            onClick={() => handleRegionChange(region.value)}
+                                            className={selectedRegion === region.value ? 'active' : ''}
+                                        >
+                                            {region.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            <hr />
+                            <button className="reset-button" onClick={handleReset}>
+                                초기화
                             </button>
-                        ))}
-                        <button
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage === searchResults.totalPages}
-                        >
-                            다음
-                        </button>
-                    </div>
-                )}
-            </section>
-        </div>
-      </Container>
+                        </div>
+                    )}
+                </aside>
 
+                <section className="results-section">
+                    <div className="item-card-list">
+                        {items.length > 0 ? (
+                            items.map((item, index) => {
+                                const imageUrl =
+                                    item.poster && item.poster.startsWith('/upload')
+                                        ? `http://www.kopis.or.kr${item.poster}`
+                                        : item.poster || '이미지 없음';
+
+                                const modifiedItem = {
+                                    ...item,
+                                    poster: imageUrl,
+                                };
+
+                                if (index === items.length - 1) {
+                                    return (
+                                        <div className="search-item-card-wrapper" key={index} ref={lastItemRef}>
+                                            <ItemCard item={modifiedItem} className="search-item-card" />
+                                            <div className="search-item-info">
+                                                <div className="search-item-title">{item.prfnm || '제목 없음'}</div>
+                                                <div className="search-item-details">
+                                                    <div>{item.fcltynm || '공연 장소 정보 없음'}</div>
+                                                    <span>
+                                                        {item.prfpdfrom === item.prfpdto
+                                                            ? item.prfpdfrom
+                                                            : `${item.prfpdfrom} - ${item.prfpdto}`}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div className="search-item-card-wrapper" key={index}>
+                                            <ItemCard item={modifiedItem} className="search-item-card" />
+                                            <div className="search-item-info">
+                                                <div className="search-item-title">{item.prfnm || '제목 없음'}</div>
+                                                <div className="search-item-details">
+                                                    <div>{item.fcltynm || '공연 장소 정보 없음'}</div>
+                                                    <span>
+                                                        {item.prfpdfrom === item.prfpdto
+                                                            ? item.prfpdfrom
+                                                            : `${item.prfpdfrom} - ${item.prfpdto}`}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                }
+                            })
+                        ) : (
+                            <p>검색 결과가 없습니다.</p>
+                        )}
+                    </div>
+                </section>
+
+                {showScrollTopButton && (
+                    <button className="scroll-to-top-button" onClick={scrollToTop}>
+                        <span>▲</span>
+                        <span>Top</span>
+                    </button>
+                )}
+            </div>
+        </Container>
     );
 };
 
