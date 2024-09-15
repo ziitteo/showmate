@@ -17,7 +17,7 @@ https://show-mate.vercel.app/
 |석민영|[@MINYOUNG-SEOK](https://github.com/MINYOUNG-SEOK)|Project Owner|랭킹페이지, 검색페이지|
 |김혜련|[@ziitteo](https://github.com/ziitteo)|Scrum Master|메인페이지, 장르별 페이지, 공통 부분|
 |김명준|[@chorongs](https://github.com/chorongs)|Developer|지역별 페이지|
-|김은서|[@hobyyy](https://github.com/hobyyy)|Developer|레이아웃, 상세페이지|
+|김은서|[@hobyyy](https://github.com/hobyyy)|Developer|레이아웃(네브바 & 푸터), 상세페이지|
 |이재영|[@jaeyoung99-lee](https://github.com/jaeyoung99-lee)|Developer|로그인 페이지, 찜 페이지|   
 <br />
 <br />
