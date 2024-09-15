@@ -20,6 +20,7 @@
 }
 .sidenav span:hover {
   color: #f1f1f1;
+  cursor: pointer;
 }
 .text-bold {
   font-weight:bolder;
@@ -33,6 +34,7 @@
 }
 .sidenav.open {
   width: 250px;
+  z-index: 10010;
 }
 .nav-hamburger{
   display: none;
