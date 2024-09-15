@@ -1,7 +1,7 @@
 ShowMate
 -------------
 
-공연예술통합전산망(KOPIS)의 OPEN API를 활용한 공연 정보 제공 웹사이트
+공연예술통합전산망(KOPIS)의 OPEN API를 활용한 공연 정보 제공 웹사이트   
 https://show-mate.vercel.app/
 
 프로젝트 진행 기간: 2024.09.08~ ~ 2024.09.15
