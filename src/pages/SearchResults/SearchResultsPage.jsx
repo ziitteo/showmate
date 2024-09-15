@@ -131,9 +131,19 @@ const SearchResultsPage = () => {
     };
 
     useEffect(() => {
-        if (window.innerWidth > 1024) {
-            setIsFilterOpen(true);
-        }
+        const handleResize = () => {
+            if (window.innerWidth > 1024) {
+                setIsFilterOpen(true);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     const handleSearch = () => {
