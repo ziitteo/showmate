@@ -28,7 +28,7 @@ const getDateForPeriod = (period) => {
   switch (period) {
     case "day":
       const yesterday = new Date(today);
-      yesterday.setDate(today.getDate() - 1);
+      yesterday.setDate(today.getDate() - 2);
       return getFormattedDate(yesterday);
     case "week":
       const oneWeekAgo = new Date(today);

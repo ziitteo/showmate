@@ -1,4 +1,3 @@
-// RankingPage.jsx
 import React, { useState } from 'react';
 import GenreRankingTab from './GenreRankingTab';
 import RankingList from './RankingList';
