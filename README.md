@@ -2,6 +2,7 @@ ShowMate
 -------------
 
 공연예술통합전산망(KOPIS)의 OPEN API를 활용한 공연 정보 제공 웹사이트
+https://show-mate.vercel.app/
 
 프로젝트 진행 기간: 2024.09.08~ ~ 2024.09.15
 
@@ -13,11 +14,11 @@ ShowMate
 -------------
 |이름|깃허브|역할|담당페이지|
 |------|---|---|---|
-|석민영|@MINYOUNG-SEOK|Project Owner|랭킹페이지, 검색페이지|
-|김혜련|@ziitteo|Scrum Master|메인페이지, 장르별 페이지, 공통 부분|
-|김명준|@chorongs|Developer|지역별 페이지|
-|김은서|@hobyyy|Developer|레이아웃, 상세페이지|
-|이재영|@jaeyoung99-lee|Developer|로그인 페이지, 찜 페이지|   
+|석민영|@MINYOUNG-SEOK(https://github.com/MINYOUNG-SEOK)|Project Owner|랭킹페이지, 검색페이지|
+|김혜련|@ziitteo(https://github.com/ziitteo)|Scrum Master|메인페이지, 장르별 페이지, 공통 부분|
+|김명준|@chorongs(https://github.com/chorongs)|Developer|지역별 페이지|
+|김은서|@hobyyy(https://github.com/hobyyy)|Developer|레이아웃, 상세페이지|
+|이재영|@jaeyoung99-lee(https://github.com/jaeyoung99-lee)|Developer|로그인 페이지, 찜 페이지|   
 <br />
 <br />
 
