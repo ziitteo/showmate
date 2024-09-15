@@ -291,7 +291,8 @@ const SearchResultsPage = () => {
 
                 {showScrollTopButton && (
                     <button className="scroll-to-top-button" onClick={scrollToTop}>
-                        ▲
+                        <span>▲</span>
+                        <span>Top</span>
                     </button>
                 )}
             </div>
